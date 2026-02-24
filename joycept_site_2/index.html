@@ -1,0 +1,2027 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Joycept — Joyce Peters Photography & Art</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,600&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --cream:#f7f2e9;--cream-mid:#ede4d2;--cream-dark:#d9cbb4;
+  --gold:#b8924a;--gold-light:#d4aa6a;--gold-pale:#eddfc0;
+  --brown:#3e2b1e;--brown-mid:#6b4f38;--brown-light:#9a7a60;
+  --text:#2c1f14;--text-mid:#5a4332;--text-light:#8a7060;
+  --white:#fff;
+}
+html{scroll-behavior:smooth}
+body,body *{cursor:none!important}body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--text);overflow-x:hidden;}
+
+/* Custom cursor */
+.cursor{
+  position:fixed;
+  top:0;left:0;
+  width:12px;height:12px;
+  background:#b8924a;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:999999;
+  will-change:transform;
+  box-shadow:0 0 8px rgba(184,146,74,0.8);
+  display:none;
+}
+.cursor-ring{
+  position:fixed;
+  top:0;left:0;
+  width:40px;height:40px;
+  border:2px solid #b8924a;
+  border-radius:50%;
+  pointer-events:none;
+  z-index:999998;
+  will-change:transform;
+  opacity:0.7;
+  display:none;
+}
+body:has(a:hover) .cursor,.cursor.hover{width:22px;height:22px}
+.cursor-ring.hover{width:56px;height:56px;opacity:0.4}
+
+/* Grain overlay */
+body::after{content:'';position:fixed;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)' opacity='0.035'/%3E%3C/svg%3E");pointer-events:none;z-index:100;opacity:0.45}
+
+/* Animations */
+@keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes scaleIn{from{opacity:0;transform:scale(0.96)}to{opacity:1;transform:scale(1)}}
+@keyframes lineGrow{from{width:0}to{width:60px}}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-12px)}}
+@keyframes spin{from{transform:rotate(0deg)}to{transform:rotate(360deg)}}
+@keyframes pulse{0%,100%{opacity:1;transform:scale(1)}50%{opacity:0.7;transform:scale(0.95)}}
+
+/* Scroll reveal */
+.reveal{opacity:0;transform:translateY(30px);transition:opacity 0.8s ease,transform 0.8s ease}
+.reveal.visible{opacity:1;transform:none}
+
+/* Section labels */
+.section-label{font-size:0.65rem;letter-spacing:0.35em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;display:flex;align-items:center;gap:0.8rem}
+.section-label::before{content:'';display:inline-block;width:28px;height:1px;background:var(--gold)}
+
+/* Section headings */
+.section-title{font-family:'Cormorant Garamond',serif;font-size:clamp(2.2rem,4vw,3.4rem);font-weight:300;line-height:1.1;color:var(--brown)}
+.section-title em{font-style:italic;color:var(--gold)}
+
+/* Divider */
+.divider{width:60px;height:1px;background:var(--gold);margin:2rem 0;animation:lineGrow 1s ease both}
+
+/* Buttons */
+.btn-primary{display:inline-block;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--cream);background:var(--brown);padding:1rem 2.4rem;text-decoration:none;border:1px solid var(--brown);transition:background 0.3s,border-color 0.3s,transform 0.2s;cursor:none}
+.btn-primary:hover{background:var(--gold);border-color:var(--gold);transform:translateY(-2px)}
+.btn-outline{display:inline-block;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--brown);background:transparent;padding:1rem 2.4rem;text-decoration:none;border:1px solid var(--cream-dark);transition:border-color 0.3s,color 0.3s,transform 0.2s;cursor:none}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);transform:translateY(-2px)}
+.btn-gold{display:inline-block;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--brown);background:var(--gold-pale);padding:1rem 2.4rem;text-decoration:none;border:1px solid var(--gold-pale);transition:background 0.3s,transform 0.2s;cursor:none}
+.btn-gold:hover{background:var(--gold);color:var(--cream);transform:translateY(-2px)}
+
+/* ═══ NAVIGATION ═══ */
+nav{position:fixed;top:0;left:0;right:0;z-index:1000;display:flex;align-items:center;justify-content:space-between;padding:1.5rem 5rem;background:rgba(247,242,233,0.92);backdrop-filter:blur(18px);border-bottom:1px solid transparent;transition:all 0.4s}
+nav.scrolled{padding:1rem 5rem;border-bottom-color:var(--cream-dark);box-shadow:0 4px 40px rgba(62,43,30,0.07)}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.7rem;font-weight:500;letter-spacing:0.1em;color:var(--brown);text-decoration:none}
+.nav-logo span{color:var(--gold)}
+.nav-links{display:flex;gap:2rem;list-style:none;align-items:center}
+.nav-links a{font-size:0.7rem;font-weight:400;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-mid);text-decoration:none;position:relative;transition:color 0.3s;cursor:none}
+.nav-links a::after{content:'';position:absolute;bottom:-3px;left:0;width:0;height:1px;background:var(--gold);transition:width 0.3s}
+.nav-links a:hover{color:var(--gold)}
+.nav-links a:hover::after{width:100%}
+.btn-nav{font-size:0.68rem!important;letter-spacing:0.16em!important;color:var(--cream)!important;background:var(--brown);padding:0.55rem 1.4rem;transition:background 0.3s!important}
+.btn-nav::after{display:none!important}
+.btn-nav:hover{background:var(--gold)!important;color:var(--cream)!important}
+.hamburger{display:none;flex-direction:column;gap:5px;cursor:none;z-index:1001}
+.hamburger span{display:block;width:22px;height:1.5px;background:var(--brown);transition:0.3s}
+
+/* ═══ HERO ═══ */
+#hero{min-height:100vh;padding-top:88px;display:grid;grid-template-columns:1fr 1fr;overflow:hidden}
+.hero-left{display:flex;flex-direction:column;justify-content:center;padding:5rem 4rem 5rem 5rem;position:relative}
+.hero-left::before{content:'';position:absolute;top:10%;left:-100px;width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,var(--gold-pale) 0%,transparent 70%);opacity:0.45;pointer-events:none}
+.hero-eyebrow{font-size:0.68rem;letter-spacing:0.32em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem;animation:fadeUp 0.9s ease both}
+.hero-title{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,5.2vw,5rem);font-weight:300;line-height:1.06;color:var(--brown);margin-bottom:1.8rem;animation:fadeUp 0.9s 0.15s ease both}
+.hero-title em{font-style:italic;color:var(--gold)}
+.hero-sub{font-size:0.93rem;font-weight:300;line-height:1.9;color:var(--text-light);max-width:370px;margin-bottom:2.8rem;animation:fadeUp 0.9s 0.3s ease both}
+.hero-actions{display:flex;gap:1rem;flex-wrap:wrap;animation:fadeUp 0.9s 0.45s ease both}
+.hero-stats{display:flex;gap:2.5rem;margin-top:3.5rem;padding-top:2.5rem;border-top:1px solid var(--cream-dark);animation:fadeUp 0.9s 0.6s ease both}
+.stat-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:400;color:var(--brown);line-height:1}
+.stat-label{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-light);margin-top:0.3rem}
+.hero-right{position:relative;overflow:hidden;animation:fadeIn 1.4s 0.2s ease both}
+.hero-mosaic{display:grid;grid-template-columns:1.2fr 1fr;grid-template-rows:1fr 1fr;height:100%;gap:4px}
+.hero-img{overflow:hidden;position:relative;transition:transform 0.6s ease}
+.hero-img:first-child{grid-row:span 2}
+.hero-img:hover{transform:scale(1.02)}
+.hero-img::after{content:'';position:absolute;inset:0;background:linear-gradient(135deg,rgba(62,43,30,0.08) 0%,transparent 60%);transition:opacity 0.4s}
+.hero-img:hover::after{opacity:0}
+.ph{width:100%;height:100%;display:block;object-fit:cover}
+.ph-1{background:linear-gradient(160deg,#c4a882 0%,#8a6040 40%,#3e2b1e 100%)}
+.ph-2{background:linear-gradient(200deg,#d4b896 0%,#a07850 50%,#5a3820 100%)}
+.ph-3{background:linear-gradient(120deg,#b89870 0%,#7a5030 60%,#2c1a10 100%)}
+/* Decorative SVG art in placeholders */
+.ph svg{position:absolute;inset:0;width:100%;height:100%;opacity:0.12}
+
+/* Scroll indicator */
+.scroll-hint{position:absolute;bottom:2.5rem;left:50%;transform:translateX(-50%);display:flex;flex-direction:column;align-items:center;gap:0.5rem;animation:fadeUp 1s 1s ease both}
+.scroll-hint span{font-size:0.62rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--text-light)}
+.scroll-line{width:1px;height:40px;background:linear-gradient(to bottom,var(--gold),transparent);animation:float 2s ease-in-out infinite}
+
+/* ═══ ABOUT ═══ */
+#about{padding:8rem 5rem;display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center;position:relative;overflow:hidden}
+#about::before{content:'';position:absolute;right:-150px;top:50%;transform:translateY(-50%);width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,var(--gold-pale) 0%,transparent 70%);opacity:0.3;pointer-events:none}
+.about-image-wrap{position:relative}
+.about-img{width:100%;aspect-ratio:3/4;object-fit:cover;display:block}
+.about-img-ph{width:100%;aspect-ratio:3/4;background:linear-gradient(170deg,#c8a878 0%,#8c5c3c 50%,#3a2216 100%);position:relative;overflow:hidden}
+.about-img-ph::after{content:'Joyce Peters';position:absolute;bottom:2rem;left:2rem;font-family:'Cormorant Garamond',serif;font-size:1rem;font-style:italic;letter-spacing:0.12em;color:rgba(255,255,255,0.6)}
+.about-accent{position:absolute;top:-1.5rem;left:-1.5rem;width:100px;height:100px;border:1px solid var(--gold-pale)}
+.about-accent2{position:absolute;bottom:-1.5rem;right:-1.5rem;width:70px;height:70px;border:1px solid var(--gold-pale)}
+.about-badge{position:absolute;bottom:3rem;right:-2.5rem;width:100px;height:100px;background:var(--brown);border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;animation:float 4s ease-in-out infinite}
+.about-badge-num{font-family:'Cormorant Garamond',serif;font-size:1.8rem;color:var(--gold-light);line-height:1}
+.about-badge-txt{font-size:0.55rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--cream-dark);margin-top:0.2rem}
+.about-text p{font-size:0.93rem;font-weight:300;line-height:1.95;color:var(--text-mid);margin-bottom:1.4rem}
+.about-skills{display:flex;flex-wrap:wrap;gap:0.6rem;margin-top:2rem}
+.skill-tag{font-size:0.65rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--brown-mid);background:var(--cream-mid);padding:0.45rem 1rem;border:1px solid var(--cream-dark)}
+
+/* ═══ PORTFOLIO ═══ */
+#portfolio{padding:8rem 5rem;background:var(--brown);position:relative;overflow:hidden}
+#portfolio::before{content:'';position:absolute;top:-100px;right:-100px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(184,146,74,0.12) 0%,transparent 70%);pointer-events:none}
+#portfolio .section-label{color:var(--gold-light)}
+#portfolio .section-title{color:var(--cream)}
+#portfolio .section-title em{color:var(--gold-light)}
+.portfolio-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:3.5rem;flex-wrap:wrap;gap:1.5rem}
+.portfolio-filters{display:flex;gap:0.6rem;flex-wrap:wrap}
+.filter-btn{font-size:0.65rem;letter-spacing:0.16em;text-transform:uppercase;color:rgba(247,242,233,0.5);background:transparent;border:1px solid rgba(247,242,233,0.15);padding:0.5rem 1.1rem;cursor:none;transition:all 0.3s}
+.filter-btn.active,.filter-btn:hover{color:var(--gold-light);border-color:var(--gold)}
+.portfolio-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:3px}
+.portfolio-item{position:relative;overflow:hidden;cursor:none}
+.portfolio-item:nth-child(1){grid-column:span 2;aspect-ratio:16/9}
+.portfolio-item:nth-child(2){aspect-ratio:1}
+.portfolio-item:nth-child(3){aspect-ratio:1}
+.portfolio-item:nth-child(4){grid-column:span 2;aspect-ratio:16/9}
+.portfolio-item:nth-child(5){grid-column:span 3;aspect-ratio:21/7}
+.p-img{width:100%;height:100%;object-fit:cover;display:block;transition:transform 0.7s ease}
+.portfolio-item:hover .p-img{transform:scale(1.06)}
+.p-overlay{position:absolute;inset:0;background:linear-gradient(to top,rgba(62,43,30,0.85) 0%,transparent 50%);opacity:0;transition:opacity 0.4s;display:flex;flex-direction:column;justify-content:flex-end;padding:2rem}
+.portfolio-item:hover .p-overlay{opacity:1}
+.p-cat{font-size:0.6rem;letter-spacing:0.22em;text-transform:uppercase;color:var(--gold-light);margin-bottom:0.4rem}
+.p-title{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--cream);font-weight:400}
+.p-actions{display:flex;gap:0.8rem;margin-top:1rem}
+.p-btn{font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--cream);background:rgba(255,255,255,0.12);border:1px solid rgba(255,255,255,0.25);padding:0.4rem 0.9rem;cursor:none;text-decoration:none;transition:background 0.3s}
+.p-btn:hover{background:var(--gold);border-color:var(--gold)}
+
+/* Portfolio color placeholders */
+.pp-1{background:linear-gradient(135deg,#7a9a8a 0%,#3d5e50 60%,#1a2e28 100%)}
+.pp-2{background:linear-gradient(160deg,#c4a882 0%,#8a5c40 50%,#3e2010 100%)}
+.pp-3{background:linear-gradient(200deg,#9ab4c8 0%,#5a7e9a 50%,#2a4060 100%)}
+.pp-4{background:linear-gradient(120deg,#d4a870 0%,#9a6a3a 50%,#4a2c14 100%)}
+.pp-5{background:linear-gradient(145deg,#b4a090 0%,#7a6050 50%,#3a2a20 100%)}
+
+/* ═══ ROOM VISUALIZER ═══ */
+#visualizer{padding:8rem 5rem;position:relative;overflow:hidden}
+.viz-header{text-align:center;margin-bottom:4rem}
+.viz-container{display:grid;grid-template-columns:260px 1fr;gap:3rem;align-items:start}
+.viz-controls{background:var(--cream-mid);border:1px solid var(--cream-dark);padding:2rem}
+.viz-section-title{font-family:'Cormorant Garamond',serif;font-size:1rem;font-weight:500;color:var(--brown);margin-bottom:1.2rem;padding-bottom:0.8rem;border-bottom:1px solid var(--cream-dark)}
+.control-group{margin-bottom:2rem}
+.control-label{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-light);margin-bottom:0.7rem;display:block}
+.room-thumbs{display:grid;grid-template-columns:1fr 1fr;gap:0.5rem;margin-bottom:1rem}
+.room-thumb{border:2px solid transparent;cursor:none;transition:border-color 0.3s;overflow:hidden;aspect-ratio:4/3}
+.room-thumb.active{border-color:var(--gold)}
+.room-thumb-img{width:100%;height:100%;display:block}
+.rt-1{background:linear-gradient(160deg,#e8dcc8 0%,#c4a882 60%,#8a6c50 100%)}
+.rt-2{background:linear-gradient(160deg,#d4e0e8 0%,#8aacbe 60%,#4a7090 100%)}
+.rt-3{background:linear-gradient(160deg,#e0e8d8 0%,#9ab4a0 60%,#5a7a68 100%)}
+.rt-4{background:linear-gradient(160deg,#2a2a2a 0%,#1a1a1a 60%,#0a0a0a 100%)}
+.color-swatches{display:flex;flex-wrap:wrap;gap:0.4rem}
+.swatch{width:28px;height:28px;border-radius:50%;cursor:none;border:2px solid transparent;transition:border-color 0.2s,transform 0.2s}
+.swatch.active,.swatch:hover{border-color:var(--brown);transform:scale(1.15)}
+.art-thumbs-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0.4rem}
+.art-thumb{border:2px solid transparent;cursor:none;transition:border-color 0.3s;overflow:hidden;aspect-ratio:1;font-size:0.5rem;color:rgba(255,255,255,0.7);display:flex;align-items:flex-end;padding:0.3rem}
+.art-thumb.active{border-color:var(--gold)}
+.at-1{background:linear-gradient(135deg,#7a9a8a,#1a2e28)}
+.at-2{background:linear-gradient(135deg,#c4a882,#3e2010)}
+.at-3{background:linear-gradient(135deg,#9ab4c8,#2a4060)}
+.at-4{background:linear-gradient(135deg,#d4a870,#4a2c14)}
+.at-5{background:linear-gradient(135deg,#b4a090,#3a2a20)}
+.at-6{background:linear-gradient(135deg,#a8b890,#2a3a20)}
+.size-btns{display:flex;gap:0.4rem;flex-wrap:wrap}
+.size-btn{font-size:0.62rem;letter-spacing:0.1em;color:var(--text-mid);background:transparent;border:1px solid var(--cream-dark);padding:0.3rem 0.7rem;cursor:none;transition:all 0.3s}
+.size-btn.active,.size-btn:hover{border-color:var(--gold);color:var(--brown)}
+.frame-btns{display:flex;gap:0.4rem}
+.frame-btn{font-size:0.62rem;letter-spacing:0.1em;color:var(--text-mid);background:transparent;border:1px solid var(--cream-dark);padding:0.3rem 0.8rem;cursor:none;transition:all 0.3s;flex:1;text-align:center}
+.frame-btn.active,.frame-btn:hover{border-color:var(--gold);color:var(--brown)}
+
+.viz-canvas{position:relative;background:var(--cream-mid);overflow:hidden;aspect-ratio:16/10;border:1px solid var(--cream-dark)}
+.room-bg{position:absolute;inset:0;transition:background 0.5s}
+/* Room scene layers */
+.room-floor{position:absolute;bottom:0;left:0;right:0;height:32%;transition:background 0.5s}
+.room-wall{position:absolute;top:0;left:0;right:0;bottom:32%;transition:background 0.5s}
+.room-baseboard{position:absolute;bottom:32%;left:0;right:0;height:6px;background:rgba(0,0,0,0.1)}
+/* Furniture SVGs drawn inline */
+.room-furniture{position:absolute;bottom:32%;left:0;right:0;transition:opacity 0.4s}
+.art-frame-wrap{position:absolute;cursor:move;transition:box-shadow 0.3s;user-select:none}
+.art-frame-wrap:hover{box-shadow:0 20px 60px rgba(0,0,0,0.3)}
+.art-frame-inner{width:100%;height:100%;position:relative;overflow:hidden}
+.art-frame-mat{position:absolute;inset:8%;background:white}
+.art-image{position:absolute;inset:18%;background:linear-gradient(135deg,#7a9a8a,#1a2e28);transition:background 0.4s}
+.frame-border-black .art-frame-wrap-outer{outline:8px solid #1a1a1a}
+.frame-border-gold .art-frame-wrap-outer{outline:8px solid #b8924a}
+.frame-border-white .art-frame-wrap-outer{outline:8px solid #f0ece4}
+.viz-controls-bar{display:flex;gap:1rem;align-items:center;margin-top:1rem;flex-wrap:wrap}
+.viz-note{font-size:0.7rem;color:var(--text-light);font-weight:300;font-style:italic;flex:1}
+.viz-add-btn{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--brown);background:var(--gold-pale);border:1px solid var(--gold-pale);padding:0.5rem 1.2rem;cursor:none;transition:all 0.3s;text-decoration:none}
+.viz-add-btn:hover{background:var(--gold);color:var(--cream)}
+
+/* ═══ AR WALL PREVIEW ═══ */
+#ar-preview{padding:8rem 5rem;background:var(--brown);color:var(--cream);position:relative;overflow:hidden}
+#ar-preview::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 30% 50%,rgba(184,146,74,0.08) 0%,transparent 60%);pointer-events:none}
+.ar-inner{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.ar-text .section-label{color:var(--gold-light)}
+.ar-text .section-title{color:var(--cream)}
+.ar-text .section-title em{color:var(--gold-light)}
+.ar-text p{font-size:0.93rem;font-weight:300;line-height:1.9;color:rgba(247,242,233,0.7);margin:1.5rem 0}
+.ar-steps{margin:2rem 0}
+.ar-step{display:flex;gap:1.2rem;align-items:flex-start;margin-bottom:1.5rem}
+.ar-step-num{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:300;color:var(--gold);line-height:1;min-width:2rem}
+.ar-step-text h4{font-size:0.78rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--cream);margin-bottom:0.3rem}
+.ar-step-text p{font-size:0.82rem;font-weight:300;color:rgba(247,242,233,0.6);margin:0;line-height:1.6}
+.ar-phone-wrap{position:relative;display:flex;justify-content:center}
+.ar-phone{width:260px;background:#111;border-radius:40px;padding:12px;box-shadow:0 40px 100px rgba(0,0,0,0.5);position:relative;margin:0 auto}
+.ar-phone-screen{background:#1a1a1a;border-radius:30px;overflow:hidden;aspect-ratio:9/19;position:relative}
+.ar-camera-feed{width:100%;height:100%;background:linear-gradient(170deg,#2a2a2a 0%,#1a1a1a 100%);position:relative;display:flex;align-items:center;justify-content:center}
+.ar-room-scene{position:absolute;inset:0;background:linear-gradient(170deg,#c8b898 0%,#a08060 40%,#6a4830 100%);opacity:0.8}
+.ar-wall-art{position:absolute;top:20%;left:50%;transform:translateX(-50%);width:80px;height:60px;background:linear-gradient(135deg,#7a9a8a,#1a2e28);box-shadow:0 8px 30px rgba(0,0,0,0.4);border:3px solid #1a1a1a;animation:float 3s ease-in-out infinite}
+.ar-overlay-ui{position:absolute;inset:0;pointer-events:none}
+.ar-corner{position:absolute;width:20px;height:20px;border-color:rgba(184,146,74,0.8);border-style:solid}
+.ar-corner-tl{top:15%;left:15%;border-width:2px 0 0 2px}
+.ar-corner-tr{top:15%;right:15%;border-width:2px 2px 0 0}
+.ar-corner-bl{bottom:15%;left:15%;border-width:0 0 2px 2px}
+.ar-corner-br{bottom:15%;right:15%;border-width:0 2px 2px 0}
+.ar-scan-line{position:absolute;left:10%;right:10%;height:1px;background:linear-gradient(to right,transparent,rgba(184,146,74,0.8),transparent);animation:arScan 3s ease-in-out infinite}
+@keyframes arScan{0%,100%{top:15%;opacity:0.8}50%{top:85%;opacity:0.4}}
+.ar-label{position:absolute;bottom:8%;left:50%;transform:translateX(-50%);font-size:8px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(184,146,74,0.9);background:rgba(0,0,0,0.4);padding:3px 8px;border-radius:10px;white-space:nowrap}
+.ar-notch{position:absolute;top:12px;left:50%;transform:translateX(-50%);width:80px;height:8px;background:#111;border-radius:10px}
+.ar-btn{display:inline-flex;align-items:center;gap:0.8rem;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--brown);background:var(--gold);padding:1rem 2.2rem;text-decoration:none;border:none;cursor:none;transition:background 0.3s,transform 0.2s}
+.ar-btn:hover{background:var(--gold-light);transform:translateY(-2px)}
+.ar-btn svg{width:16px;height:16px;fill:currentColor}
+.ar-badge{position:absolute;top:-1rem;right:-1rem;background:var(--gold);color:var(--brown);font-size:0.6rem;letter-spacing:0.12em;text-transform:uppercase;padding:0.4rem 0.9rem;font-weight:500}
+
+/* AR Modal */
+.ar-modal{position:fixed;inset:0;z-index:5000;background:rgba(0,0,0,0.95);display:flex;flex-direction:column;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.4s}
+.ar-modal.open{opacity:1;pointer-events:all}
+.ar-modal-inner{position:relative;width:min(400px,90vw)}
+.ar-modal-video{width:100%;border-radius:8px;display:block;background:#111;aspect-ratio:9/16;object-fit:cover;transform:scaleX(-1)}
+.ar-modal-overlay{position:absolute;inset:0;border-radius:8px;pointer-events:none}
+.ar-modal-art{position:absolute;width:45%;aspect-ratio:4/3;cursor:move;touch-action:none}
+.ar-modal-art-img{width:100%;height:100%;display:block;object-fit:cover;box-shadow:0 10px 40px rgba(0,0,0,0.5)}
+.ar-modal-controls{margin-top:1.5rem;display:flex;gap:1rem;flex-wrap:wrap;justify-content:center}
+.ar-modal-btn{font-size:0.65rem;letter-spacing:0.15em;text-transform:uppercase;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.2);color:white;padding:0.6rem 1.2rem;cursor:none;transition:background 0.3s}
+.ar-modal-btn:hover{background:var(--gold);border-color:var(--gold)}
+.ar-modal-close{position:absolute;top:-3rem;right:0;font-size:0.7rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(255,255,255,0.5);background:transparent;border:none;cursor:none;transition:color 0.3s}
+.ar-modal-close:hover{color:var(--gold)}
+.ar-modal-hint{font-size:0.7rem;color:rgba(255,255,255,0.5);text-align:center;margin-top:0.8rem;font-style:italic}
+.ar-corner-scan{position:absolute;width:30px;height:30px;border-color:rgba(184,146,74,0.9);border-style:solid}
+.ar-corner-scan-tl{top:8%;left:5%;border-width:2px 0 0 2px}
+.ar-corner-scan-tr{top:8%;right:5%;border-width:2px 2px 0 0}
+.ar-corner-scan-bl{bottom:8%;left:5%;border-width:0 0 2px 2px}
+.ar-corner-scan-br{bottom:8%;right:5%;border-width:0 2px 2px 0}
+
+/* ═══ SERVICES ═══ */
+#services{padding:8rem 5rem;position:relative;overflow:hidden}
+#services::before{content:'';position:absolute;left:-100px;bottom:0;width:350px;height:350px;border-radius:50%;background:radial-gradient(circle,var(--gold-pale) 0%,transparent 70%);opacity:0.3;pointer-events:none}
+.services-header{text-align:center;max-width:600px;margin:0 auto 5rem}
+.services-header p{font-size:0.93rem;font-weight:300;line-height:1.9;color:var(--text-light);margin-top:1.2rem}
+.services-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:2px;margin-bottom:4rem}
+.service-card{padding:3rem 2.5rem;background:var(--cream-mid);border:1px solid var(--cream-dark);position:relative;overflow:hidden;transition:transform 0.3s,box-shadow 0.3s}
+.service-card::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(to right,var(--gold),var(--gold-light));transform:scaleX(0);transform-origin:left;transition:transform 0.4s}
+.service-card:hover{transform:translateY(-4px);box-shadow:0 20px 60px rgba(62,43,30,0.1)}
+.service-card:hover::before{transform:scaleX(1)}
+.service-icon{width:48px;height:48px;margin-bottom:1.8rem;color:var(--gold)}
+.service-card h3{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:400;color:var(--brown);margin-bottom:0.8rem}
+.service-card p{font-size:0.85rem;font-weight:300;line-height:1.85;color:var(--text-light)}
+.service-price{margin-top:1.5rem;padding-top:1.2rem;border-top:1px solid var(--cream-dark);font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--gold)}
+.print-specs{margin-top:0.6rem;display:flex;flex-wrap:wrap;gap:0.4rem}
+.spec-tag{font-size:0.58rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-light);background:var(--cream);padding:0.25rem 0.6rem;border:1px solid var(--cream-dark)}
+
+/* ═══ SHOP ═══ */
+#shop{padding:8rem 5rem;background:var(--cream-mid);position:relative}
+.shop-header{display:flex;align-items:flex-end;justify-content:space-between;margin-bottom:4rem;flex-wrap:wrap;gap:1.5rem}
+.shop-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:1.5rem}
+.shop-card{background:var(--cream);cursor:none;group:true;transition:transform 0.3s}
+.shop-card:hover{transform:translateY(-4px)}
+.shop-img{aspect-ratio:4/5;overflow:hidden;position:relative}
+.shop-img-ph{width:100%;height:100%;display:block;transition:transform 0.6s ease}
+.shop-card:hover .shop-img-ph{transform:scale(1.05)}
+.si-1{background:linear-gradient(135deg,#7a9a8a 0%,#1a2e28 100%)}
+.si-2{background:linear-gradient(135deg,#c4a882 0%,#3e2010 100%)}
+.si-3{background:linear-gradient(135deg,#9ab4c8 0%,#2a4060 100%)}
+.si-4{background:linear-gradient(135deg,#d4a870 0%,#4a2c14 100%)}
+.si-5{background:linear-gradient(135deg,#b4a090 0%,#3a2a20 100%)}
+.si-6{background:linear-gradient(135deg,#a8b890 0%,#2a3a20 100%)}
+.si-7{background:linear-gradient(135deg,#d4b8a0 0%,#5a3820 100%)}
+.si-8{background:linear-gradient(135deg,#c4d4b8 0%,#2a3a18 100%)}
+.shop-quick-view{position:absolute;bottom:0;left:0;right:0;background:rgba(62,43,30,0.85);color:var(--cream);font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;text-align:center;padding:0.8rem;transform:translateY(100%);transition:transform 0.3s;cursor:none}
+.shop-card:hover .shop-quick-view{transform:translateY(0)}
+.shop-info{padding:1.2rem 0}
+.shop-cat{font-size:0.6rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);margin-bottom:0.3rem}
+.shop-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:400;color:var(--brown);margin-bottom:0.6rem}
+.shop-price-row{display:flex;align-items:center;justify-content:space-between}
+.shop-price{font-size:0.88rem;color:var(--text-mid)}
+.shop-add{font-size:0.6rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--gold);border:1px solid var(--gold-pale);padding:0.3rem 0.7rem;cursor:none;background:transparent;transition:all 0.3s}
+.shop-add:hover{background:var(--gold);color:var(--cream);border-color:var(--gold)}
+.shop-badge{position:absolute;top:1rem;left:1rem;font-size:0.58rem;letter-spacing:0.1em;text-transform:uppercase;padding:0.3rem 0.7rem;font-weight:500}
+.badge-new{background:var(--gold);color:var(--brown)}
+.badge-ltd{background:var(--brown);color:var(--cream)}
+
+/* Print options modal */
+.print-modal{position:fixed;inset:0;z-index:4000;background:rgba(62,43,30,0.7);backdrop-filter:blur(8px);display:flex;align-items:center;justify-content:center;opacity:0;pointer-events:none;transition:opacity 0.4s}
+.print-modal.open{opacity:1;pointer-events:all}
+.print-modal-inner{background:var(--cream);max-width:700px;width:90%;max-height:90vh;overflow-y:auto;display:grid;grid-template-columns:1fr 1fr;position:relative}
+.pm-image{background:linear-gradient(135deg,#7a9a8a 0%,#1a2e28 100%);aspect-ratio:1}
+.pm-content{padding:2.5rem}
+.pm-close{position:absolute;top:1rem;right:1rem;background:transparent;border:none;font-size:1.2rem;cursor:none;color:var(--text-light);transition:color 0.3s}
+.pm-close:hover{color:var(--brown)}
+.pm-title{font-family:'Cormorant Garamond',serif;font-size:1.6rem;font-weight:400;color:var(--brown);margin-bottom:0.4rem}
+.pm-artist{font-size:0.72rem;letter-spacing:0.15em;text-transform:uppercase;color:var(--text-light);margin-bottom:1.5rem}
+.pm-opt-label{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-light);display:block;margin-bottom:0.6rem;margin-top:1.2rem}
+.pm-sizes{display:flex;flex-wrap:wrap;gap:0.4rem}
+.pm-sz{font-size:0.65rem;letter-spacing:0.1em;color:var(--text-mid);background:transparent;border:1px solid var(--cream-dark);padding:0.35rem 0.7rem;cursor:none;transition:all 0.3s}
+.pm-sz.active,.pm-sz:hover{border-color:var(--gold);color:var(--brown)}
+.pm-materials{display:flex;flex-wrap:wrap;gap:0.4rem}
+.pm-mat{font-size:0.65rem;letter-spacing:0.1em;color:var(--text-mid);background:transparent;border:1px solid var(--cream-dark);padding:0.35rem 0.7rem;cursor:none;transition:all 0.3s}
+.pm-mat.active,.pm-mat:hover{border-color:var(--gold);color:var(--brown)}
+.pm-qty{display:flex;align-items:center;gap:0.8rem;margin-top:1rem}
+.pm-qty-btn{width:30px;height:30px;border:1px solid var(--cream-dark);background:transparent;cursor:none;font-size:1.1rem;color:var(--brown);display:flex;align-items:center;justify-content:center;transition:all 0.3s}
+.pm-qty-btn:hover{border-color:var(--gold);color:var(--gold)}
+.pm-qty-num{font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--brown);min-width:2rem;text-align:center}
+.pm-total{font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:var(--gold);margin:1.2rem 0 0}
+.pm-shipping{font-size:0.72rem;color:var(--text-light);margin-bottom:1.5rem;font-weight:300}
+.pm-add-cart{width:100%;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--cream);background:var(--brown);border:1px solid var(--brown);padding:1rem;cursor:none;transition:background 0.3s;margin-bottom:0.6rem}
+.pm-add-cart:hover{background:var(--gold);border-color:var(--gold)}
+.pm-wishlist{width:100%;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--brown);background:transparent;border:1px solid var(--cream-dark);padding:1rem;cursor:none;transition:border-color 0.3s}
+.pm-wishlist:hover{border-color:var(--gold)}
+
+/* Cart */
+.cart-sidebar{position:fixed;top:0;right:0;bottom:0;width:380px;background:var(--cream);z-index:2000;transform:translateX(100%);transition:transform 0.4s ease;border-left:1px solid var(--cream-dark);display:flex;flex-direction:column}
+.cart-sidebar.open{transform:translateX(0)}
+.cart-header{padding:2rem;border-bottom:1px solid var(--cream-dark);display:flex;align-items:center;justify-content:space-between}
+.cart-title{font-family:'Cormorant Garamond',serif;font-size:1.4rem;color:var(--brown)}
+.cart-close{background:transparent;border:none;cursor:none;color:var(--text-light);font-size:1.2rem;transition:color 0.3s}
+.cart-close:hover{color:var(--brown)}
+.cart-items{flex:1;overflow-y:auto;padding:1.5rem 2rem}
+.cart-empty{text-align:center;padding:3rem 0;color:var(--text-light);font-size:0.88rem;font-weight:300;font-style:italic}
+.cart-item{display:grid;grid-template-columns:70px 1fr auto;gap:1rem;align-items:start;padding:1rem 0;border-bottom:1px solid var(--cream-mid)}
+.cart-item-img{aspect-ratio:1;overflow:hidden}
+.ci-img{width:100%;height:100%;display:block}
+.cart-item-name{font-family:'Cormorant Garamond',serif;font-size:1rem;color:var(--brown)}
+.cart-item-details{font-size:0.68rem;letter-spacing:0.1em;color:var(--text-light);margin-top:0.3rem}
+.cart-item-price{font-size:0.9rem;color:var(--text-mid)}
+.cart-item-remove{background:transparent;border:none;cursor:none;color:var(--text-light);font-size:0.75rem;margin-top:0.5rem;transition:color 0.3s}
+.cart-item-remove:hover{color:var(--gold)}
+.cart-footer{padding:2rem;border-top:1px solid var(--cream-dark)}
+.cart-subtotal{display:flex;justify-content:space-between;align-items:center;margin-bottom:0.6rem}
+.cart-subtotal-label{font-size:0.72rem;letter-spacing:0.14em;text-transform:uppercase;color:var(--text-light)}
+.cart-subtotal-val{font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--brown)}
+.cart-shipping-note{font-size:0.72rem;color:var(--gold);margin-bottom:1.5rem;font-weight:300}
+.cart-checkout{display:block;width:100%;text-align:center;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--cream);background:var(--brown);padding:1.1rem;text-decoration:none;border:1px solid var(--brown);cursor:none;transition:background 0.3s;margin-bottom:0.7rem}
+.cart-checkout:hover{background:var(--gold);border-color:var(--gold)}
+.cart-continue{display:block;text-align:center;font-size:0.68rem;letter-spacing:0.16em;text-transform:uppercase;color:var(--text-light);cursor:none;background:transparent;border:none;transition:color 0.3s;width:100%;padding:0.5rem}
+.cart-continue:hover{color:var(--gold)}
+.cart-icon-wrap{position:relative;cursor:none}
+.cart-count{position:absolute;top:-6px;right:-8px;width:16px;height:16px;background:var(--gold);border-radius:50%;font-size:0.55rem;color:var(--brown);display:flex;align-items:center;justify-content:center;font-weight:500}
+
+/* ═══ CONTACT ═══ */
+#contact{padding:8rem 5rem;position:relative;overflow:hidden}
+#contact::after{content:'';position:absolute;right:-100px;top:50%;transform:translateY(-50%);width:400px;height:400px;border-radius:50%;background:radial-gradient(circle,var(--gold-pale) 0%,transparent 70%);opacity:0.3;pointer-events:none}
+.contact-inner{display:grid;grid-template-columns:1fr 1fr;gap:6rem}
+.contact-info h4{font-family:'Cormorant Garamond',serif;font-size:1.2rem;font-weight:400;color:var(--brown);margin-bottom:1rem}
+.contact-info p{font-size:0.88rem;font-weight:300;line-height:1.9;color:var(--text-light)}
+.contact-links{margin-top:2rem;display:flex;flex-direction:column;gap:0.8rem}
+.contact-link{font-size:0.78rem;color:var(--text-mid);text-decoration:none;display:flex;align-items:center;gap:0.8rem;transition:color 0.3s;cursor:none}
+.contact-link:hover{color:var(--gold)}
+.contact-link svg{width:16px;height:16px;color:var(--gold);flex-shrink:0}
+.social-links{margin-top:2.5rem;display:flex;gap:1rem}
+.social-link{width:38px;height:38px;border:1px solid var(--cream-dark);display:flex;align-items:center;justify-content:center;color:var(--text-light);text-decoration:none;transition:all 0.3s;cursor:none}
+.social-link:hover{border-color:var(--gold);color:var(--gold)}
+.social-link svg{width:16px;height:16px}
+.contact-form{display:flex;flex-direction:column;gap:1.2rem}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
+.form-group{display:flex;flex-direction:column;gap:0.5rem}
+.form-group label{font-size:0.65rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--text-light)}
+.form-group input,.form-group textarea,.form-group select{font-family:'Jost',sans-serif;font-size:0.88rem;font-weight:300;color:var(--text);background:var(--cream-mid);border:1px solid var(--cream-dark);padding:0.85rem 1.1rem;transition:border-color 0.3s;outline:none;cursor:none;resize:vertical}
+.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--gold);background:var(--cream)}
+.form-group textarea{min-height:130px}
+.form-submit{align-self:flex-start}
+
+/* ═══ FOOTER ═══ */
+footer{background:var(--brown);color:var(--cream);padding:5rem 5rem 2rem}
+.footer-grid{display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:4rem;margin-bottom:4rem}
+.footer-brand .nav-logo{color:var(--cream)}
+.footer-brand .nav-logo span{color:var(--gold)}
+.footer-brand p{font-size:0.82rem;font-weight:300;line-height:1.85;color:rgba(247,242,233,0.55);margin-top:1.2rem;max-width:240px}
+.footer-social{display:flex;gap:0.8rem;margin-top:1.5rem}
+.footer-social-link{width:34px;height:34px;border:1px solid rgba(247,242,233,0.2);display:flex;align-items:center;justify-content:center;color:rgba(247,242,233,0.4);text-decoration:none;transition:all 0.3s;cursor:none}
+.footer-social-link:hover{border-color:var(--gold);color:var(--gold)}
+.footer-col h4{font-size:0.68rem;letter-spacing:0.2em;text-transform:uppercase;color:rgba(247,242,233,0.9);margin-bottom:1.5rem}
+.footer-links{list-style:none;display:flex;flex-direction:column;gap:0.7rem}
+.footer-links a{font-size:0.82rem;font-weight:300;color:rgba(247,242,233,0.5);text-decoration:none;transition:color 0.3s;cursor:none}
+.footer-links a:hover{color:var(--gold)}
+.footer-bottom{border-top:1px solid rgba(247,242,233,0.1);padding-top:1.8rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem}
+.footer-copy{font-size:0.72rem;color:rgba(247,242,233,0.35);font-weight:300}
+.footer-legal{display:flex;gap:2rem}
+.footer-legal a{font-size:0.72rem;color:rgba(247,242,233,0.35);text-decoration:none;cursor:none;transition:color 0.3s}
+.footer-legal a:hover{color:var(--gold)}
+.shipping-badge{display:inline-flex;align-items:center;gap:0.5rem;background:rgba(184,146,74,0.15);border:1px solid rgba(184,146,74,0.3);padding:0.4rem 0.9rem;margin-top:1rem;font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--gold-light)}
+
+/* Responsive */
+@media(max-width:1024px){
+  nav{padding:1.2rem 2.5rem}
+  nav.scrolled{padding:0.9rem 2.5rem}
+  #hero{grid-template-columns:1fr;min-height:auto}
+  .hero-left{padding:4rem 2.5rem}
+  .hero-right{height:60vw}
+  #about,#contact .contact-inner{grid-template-columns:1fr;gap:3rem}
+  .viz-container{grid-template-columns:1fr}
+  .ar-inner{grid-template-columns:1fr;gap:4rem}
+  .portfolio-grid{grid-template-columns:1fr 1fr}
+  .portfolio-item:nth-child(1),.portfolio-item:nth-child(4),.portfolio-item:nth-child(5){grid-column:span 2;aspect-ratio:16/9}
+  .shop-grid{grid-template-columns:repeat(2,1fr)}
+  .services-grid{grid-template-columns:1fr}
+  .footer-grid{grid-template-columns:1fr 1fr}
+  #hero,#about,#portfolio,#visualizer,#ar-preview,#services,#shop,#contact,footer{padding-left:2.5rem;padding-right:2.5rem}
+}
+@media(max-width:640px){
+  .nav-links{display:none}
+  .hamburger{display:flex}
+  .shop-grid{grid-template-columns:1fr}
+  .print-modal-inner{grid-template-columns:1fr}
+  .pm-image{display:none}
+  .hero-stats{flex-wrap:wrap;gap:1.5rem}
+  .footer-grid{grid-template-columns:1fr}
+}
+</style>
+<script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Joy<span>cept</span></a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#portfolio">Portfolio</a></li>
+    <li><a href="#visualizer">Visualizer</a></li>
+    <li><a href="#services">Services</a></li>
+    <li><a href="#shop">Shop</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li>
+      <a href="#" class="btn-nav" id="cartToggle">
+        <span class="cart-icon-wrap">
+          Cart <span class="cart-count" id="cartCount">0</span>
+        </span>
+      </a>
+    </li>
+  </ul>
+  <div class="hamburger" id="hamburger">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="hero">
+  <div class="hero-left">
+    <p class="hero-eyebrow">Photography &amp; Fine Art Prints</p>
+    <h1 class="hero-title">
+      Where light<br>becomes <em>art</em>
+    </h1>
+    <p class="hero-sub">Joyce Peters captures the world in moments of quiet beauty — from sweeping landscapes to intimate portraits. Every print is made on demand, shipped worldwide.</p>
+    <div class="hero-actions">
+      <a href="#portfolio" class="btn-primary">View Portfolio</a>
+      <a href="#shop" class="btn-outline">Shop Prints</a>
+    </div>
+    <div class="hero-stats">
+      <div>
+        <div class="stat-num">19</div>
+        <div class="stat-label">Original Works</div>
+      </div>
+      <div>
+        <div class="stat-num">48</div>
+        <div class="stat-label">Countries Shipped</div>
+      </div>
+      <div>
+        <div class="stat-num">12yr</div>
+        <div class="stat-label">Experience</div>
+      </div>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="hero-mosaic">
+      <div class="hero-img"><img src="photos/BR1.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block" alt="Bad Romance"></div>
+      <div class="hero-img"><img src="photos/BRBff.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block" alt="Bad Romance 2.0"></div>
+      <div class="hero-img"><img src="photos/Orange_5.jpg" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block" alt="Orange 01"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ ABOUT ═══ -->
+<section id="about">
+  <div class="about-image-wrap reveal">
+    <div class="about-accent"></div>
+    <div class="about-img-ph"></div>
+    <div class="about-accent2"></div>
+    <div class="about-badge">
+      <div class="about-badge-num">12</div>
+      <div class="about-badge-txt">Years</div>
+    </div>
+  </div>
+  <div class="about-text reveal">
+    <p class="section-label">About Joyce</p>
+    <h2 class="section-title">Art that <em>feels</em><br>like home</h2>
+    <div class="divider"></div>
+    <p>Joyce Peters is a photographer and artist based in Sheffield, UK. Her work explores the intersection of light, texture, and memory — finding extraordinary beauty in everyday moments and transforming them into heirloom-quality prints.</p>
+    <p>Having exhibited internationally and built a devoted collector base across 48 countries, Joyce's prints are trusted to anchor living spaces with depth and warmth. Every piece in the Joycept collection is printed on demand using museum-grade materials and shipped directly to your door.</p>
+    <div class="about-skills">
+      <span class="skill-tag">Fine Art Photography</span>
+      <span class="skill-tag">Abstract Art</span>
+      <span class="skill-tag">Landscape</span>
+      <span class="skill-tag">Portraiture</span>
+      <span class="skill-tag">Limited Editions (50)</span>
+      <span class="skill-tag">Commissions</span>
+    </div>
+    <div style="margin-top:2.5rem">
+      <a href="#contact" class="btn-outline">Commission a Piece</a>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ PORTFOLIO ═══ -->
+<section id="portfolio">
+  <div class="portfolio-header reveal">
+    <div>
+      <p class="section-label">Selected Work</p>
+      <h2 class="section-title">The <em>Collection</em></h2>
+    </div>
+    <div class="portfolio-filters">
+      <button class="filter-btn active" data-filter="all">All</button>
+      <button class="filter-btn" data-filter="landscape">Landscape</button>
+      <button class="filter-btn" data-filter="abstract">Abstract</button>
+      <button class="filter-btn" data-filter="portrait">Portrait</button>
+      <button class="filter-btn" data-filter="still-life">Still Life</button>
+      <button class="filter-btn" data-filter="the-fruition">The Fruition</button>
+    </div>
+  </div>
+  <div class="portfolio-grid reveal">
+    <div class="portfolio-item" data-category="portrait">
+      <img src="photos/BR1.jpg" class="p-img" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block" alt="Bad Romance">
+      <div class="p-overlay">
+        <p class="p-cat">Portrait</p>
+        <p class="p-title">Bad Romance</p>
+        <div class="p-actions">
+          <a href="#" class="p-btn" onclick="openPrintModal('Bad Romance','£40');return false">Buy Print</a>
+          <a href="#visualizer" class="p-btn">Visualise</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-category="portrait">
+      <img src="photos/BRBff.jpg" class="p-img" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block" alt="Bad Romance 2.0">
+      <div class="p-overlay">
+        <p class="p-cat">Portrait</p>
+        <p class="p-title">Bad Romance 2.0</p>
+        <div class="p-actions">
+          <a href="#" class="p-btn" onclick="openPrintModal('Bad Romance 2.0','£40');return false">Buy Print</a>
+          <a href="#visualizer" class="p-btn">Visualise</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-category="the-fruition">
+      <img src="photos/Orange_5.jpg" class="p-img" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block" alt="Orange 01 — The Fruition">
+      <div class="p-overlay">
+        <p class="p-cat">The Fruition</p>
+        <p class="p-title">Orange 01</p>
+        <div class="p-actions">
+          <a href="#" class="p-btn" onclick="openPrintModal('Orange 01','£40');return false">Buy Print</a>
+          <a href="#visualizer" class="p-btn">Visualise</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-category="the-fruition">
+      <img src="photos/Orange_6.jpg" class="p-img" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block" alt="Orange 02 — The Fruition">
+      <div class="p-overlay">
+        <p class="p-cat">Still Life</p>
+        <p class="p-title">Amber & Shadow</p>
+        <div class="p-actions">
+          <a href="#" class="p-btn" onclick="openPrintModal('Orange 02','£40');return false">Buy Print</a>
+          <a href="#visualizer" class="p-btn">Visualise</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-category="the-fruition">
+      <img src="photos/banan-3.jpg" class="p-img" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block" alt="Banana 01 — The Fruition">
+      <div class="p-overlay">
+        <p class="p-cat">The Fruition</p>
+        <p class="p-title">Banana 01</p>
+        <div class="p-actions">
+          <a href="#" class="p-btn" onclick="openPrintModal('Banana 01','£40');return false">Buy Print</a>
+          <a href="#visualizer" class="p-btn">Visualise</a>
+        </div>
+      </div>
+    </div>
+  
+    <div class="portfolio-item the-fruition" data-category="the-fruition">
+      <img src="photos/B5.jpg" class="p-img" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block" alt="Banana 02 — The Fruition">
+      <div class="p-overlay">
+        <p class="p-cat">The Fruition</p>
+        <p class="p-title">Banana 02</p>
+        <div class="p-actions">
+          <a href="#" class="p-btn" onclick="openPrintModal('Banana 02','£40');return false">Buy Print</a>
+          <a href="#visualizer" class="p-btn">Visualise</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-category="the-fruition">
+      <img src="photos/strawberry-1.jpg" class="p-img" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block" alt="Strawberry 01">
+      <div class="p-overlay">
+        <p class="p-cat">The Fruition</p>
+        <p class="p-title">Strawberry 01</p>
+        <div class="p-actions">
+          <a href="#" class="p-btn" onclick="openPrintModal('Strawberry 01','£40');return false">Buy Print</a>
+          <a href="#visualizer" class="p-btn">Visualise</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-category="the-fruition">
+      <img src="photos/strawberry-3.jpg" class="p-img" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block" alt="Strawberry 02">
+      <div class="p-overlay">
+        <p class="p-cat">The Fruition</p>
+        <p class="p-title">Strawberry 02</p>
+        <div class="p-actions">
+          <a href="#" class="p-btn" onclick="openPrintModal('Strawberry 02','£40');return false">Buy Print</a>
+          <a href="#visualizer" class="p-btn">Visualise</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-category="the-fruition">
+      <img src="photos/wmelon-5_small_size.jpg" class="p-img" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block" alt="Watermelon 01">
+      <div class="p-overlay">
+        <p class="p-cat">The Fruition</p>
+        <p class="p-title">Watermelon 01</p>
+        <div class="p-actions">
+          <a href="#" class="p-btn" onclick="openPrintModal('Watermelon 01','£40');return false">Buy Print</a>
+          <a href="#visualizer" class="p-btn">Visualise</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-category="the-fruition">
+      <img src="photos/wmelon-grillz_dia.jpg" class="p-img" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block" alt="Watermelon 02">
+      <div class="p-overlay">
+        <p class="p-cat">The Fruition</p>
+        <p class="p-title">Watermelon 02</p>
+        <div class="p-actions">
+          <a href="#" class="p-btn" onclick="openPrintModal('Watermelon 02','£40');return false">Buy Print</a>
+          <a href="#visualizer" class="p-btn">Visualise</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-category="the-fruition">
+      <img src="photos/Lychee-1.jpg" class="p-img" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block" alt="Lychee 01">
+      <div class="p-overlay">
+        <p class="p-cat">The Fruition</p>
+        <p class="p-title">Lychee 01</p>
+        <div class="p-actions">
+          <a href="#" class="p-btn" onclick="openPrintModal('Lychee 01','£40');return false">Buy Print</a>
+          <a href="#visualizer" class="p-btn">Visualise</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-category="the-fruition">
+      <img src="photos/Lychee-2.jpg" class="p-img" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block" alt="Lychee 02">
+      <div class="p-overlay">
+        <p class="p-cat">The Fruition</p>
+        <p class="p-title">Lychee 02</p>
+        <div class="p-actions">
+          <a href="#" class="p-btn" onclick="openPrintModal('Lychee 02','£40');return false">Buy Print</a>
+          <a href="#visualizer" class="p-btn">Visualise</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-category="the-fruition">
+      <img src="photos/G1_proto.jpg" class="p-img" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block" alt="Grape 01">
+      <div class="p-overlay">
+        <p class="p-cat">The Fruition</p>
+        <p class="p-title">Grape 01</p>
+        <div class="p-actions">
+          <a href="#" class="p-btn" onclick="openPrintModal('Grape 01','£40');return false">Buy Print</a>
+          <a href="#visualizer" class="p-btn">Visualise</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-category="the-fruition">
+      <img src="photos/G2_proto.jpg" class="p-img" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block" alt="Grape 02">
+      <div class="p-overlay">
+        <p class="p-cat">The Fruition</p>
+        <p class="p-title">Grape 02</p>
+        <div class="p-actions">
+          <a href="#" class="p-btn" onclick="openPrintModal('Grape 02','£40');return false">Buy Print</a>
+          <a href="#visualizer" class="p-btn">Visualise</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-category="the-fruition">
+      <img src="photos/bb_copy.jpg" class="p-img" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block" alt="Blackberry 01">
+      <div class="p-overlay">
+        <p class="p-cat">The Fruition</p>
+        <p class="p-title">Blackberry 01</p>
+        <div class="p-actions">
+          <a href="#" class="p-btn" onclick="openPrintModal('Blackberry 01','£40');return false">Buy Print</a>
+          <a href="#visualizer" class="p-btn">Visualise</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-category="the-fruition">
+      <img src="photos/bb4.jpg" class="p-img" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block" alt="Blackberry 02">
+      <div class="p-overlay">
+        <p class="p-cat">The Fruition</p>
+        <p class="p-title">Blackberry 02</p>
+        <div class="p-actions">
+          <a href="#" class="p-btn" onclick="openPrintModal('Blackberry 02','£40');return false">Buy Print</a>
+          <a href="#visualizer" class="p-btn">Visualise</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-category="the-fruition">
+      <img src="photos/Avo-2.jpg" class="p-img" style="width:100%;height:100%;object-fit:cover;object-position:center top;display:block" alt="Avocado 01">
+      <div class="p-overlay">
+        <p class="p-cat">The Fruition</p>
+        <p class="p-title">Avocado 01</p>
+        <div class="p-actions">
+          <a href="#" class="p-btn" onclick="openPrintModal('Avocado 01','£40');return false">Buy Print</a>
+          <a href="#visualizer" class="p-btn">Visualise</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-category="the-fruition">
+      <img src="photos/Avo-3.jpg" class="p-img" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block" alt="Avocado 02">
+      <div class="p-overlay">
+        <p class="p-cat">The Fruition</p>
+        <p class="p-title">Avocado 02</p>
+        <div class="p-actions">
+          <a href="#" class="p-btn" onclick="openPrintModal('Avocado 02','£40');return false">Buy Print</a>
+          <a href="#visualizer" class="p-btn">Visualise</a>
+        </div>
+      </div>
+    </div>
+    <div class="portfolio-item" data-category="the-fruition">
+      <img src="photos/Avo-4.jpg" class="p-img" style="width:100%;height:100%;object-fit:cover;object-position:center;display:block" alt="Avocado 03">
+      <div class="p-overlay">
+        <p class="p-cat">The Fruition</p>
+        <p class="p-title">Avocado 03</p>
+        <div class="p-actions">
+          <a href="#" class="p-btn" onclick="openPrintModal('Avocado 03','£40');return false">Buy Print</a>
+          <a href="#visualizer" class="p-btn">Visualise</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div style="text-align:center;margin-top:3.5rem" class="reveal">
+    <a href="#shop" class="btn-outline" style="border-color:rgba(247,242,233,0.3);color:rgba(247,242,233,0.7)">Shop All Prints</a>
+  </div>
+</section>
+
+<!-- ═══ ROOM VISUALIZER ═══ -->
+<section id="visualizer">
+  <div class="viz-header reveal">
+    <p class="section-label">Interactive</p>
+    <h2 class="section-title">See it on your <em>wall</em></h2>
+    <p style="font-size:0.9rem;font-weight:300;color:var(--text-light);max-width:500px;margin:1rem auto 0;line-height:1.8">Choose a room style, wall colour, furniture, and artwork — then drag the print to find your perfect placement.</p>
+  </div>
+  <div class="viz-container reveal">
+    <aside class="viz-controls">
+      <p class="viz-section-title">Room Scene</p>
+      <div class="control-group">
+        <div class="room-thumbs" style="grid-template-columns:repeat(3,1fr)">
+          <div class="room-thumb active" data-room="living" title="Living Room" style="background:linear-gradient(160deg,#c8b89a 40%,#8a6040 100%);display:flex;align-items:flex-end;justify-content:center;padding-bottom:0.3rem">
+            <span style="font-size:0.5rem;letter-spacing:0.08em;color:rgba(255,255,255,0.85);text-transform:uppercase">Living Room</span>
+          </div>
+          <div class="room-thumb" data-room="bedroom" title="Bedroom" style="background:linear-gradient(160deg,#c8d4e0 40%,#8090a0 100%);display:flex;align-items:flex-end;justify-content:center;padding-bottom:0.3rem">
+            <span style="font-size:0.5rem;letter-spacing:0.08em;color:rgba(255,255,255,0.85);text-transform:uppercase">Bedroom</span>
+          </div>
+          <div class="room-thumb" data-room="dining" title="Dining Room" style="background:linear-gradient(160deg,#c8b8a0 40%,#6a5038 100%);display:flex;align-items:flex-end;justify-content:center;padding-bottom:0.3rem">
+            <span style="font-size:0.5rem;letter-spacing:0.08em;color:rgba(255,255,255,0.85);text-transform:uppercase">Dining Room</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="viz-section-title">Wall Colour</p>
+      <div class="control-group">
+        <div class="color-swatches" id="wallSwatches">
+          <div class="swatch active" data-color="#ede4d2" style="background:#ede4d2" title="Cream"></div>
+          <div class="swatch" data-color="#d4ccc0" style="background:#d4ccc0" title="Stone"></div>
+          <div class="swatch" data-color="#c8d4d0" style="background:#c8d4d0" title="Sage"></div>
+          <div class="swatch" data-color="#d0d8e4" style="background:#d0d8e4" title="Mist"></div>
+          <div class="swatch" data-color="#e4d0c8" style="background:#e4d0c8" title="Blush"></div>
+          <div class="swatch" data-color="#2a2a2a" style="background:#2a2a2a" title="Charcoal"></div>
+          <div class="swatch" data-color="#1a2a1a" style="background:#1a2a1a" title="Forest"></div>
+          <div class="swatch" data-color="#f5f5f0" style="background:#f5f5f0" title="White"></div>
+        </div>
+      </div>
+
+      <p class="viz-section-title">Artwork</p>
+      <div class="control-group">
+        <div class="art-thumbs-grid" id="artThumbs">
+          <div class="art-thumb at-1 active" data-art="0" data-bg="photos/BR1.jpg" style="background:url(photos/BR1.jpg) center/cover;background-size:cover">01</div>
+          <div class="art-thumb at-2" data-art="1" data-bg="photos/BRBff.jpg" style="background:url(photos/BRBff.jpg) center/cover;background-size:cover">02</div>
+          <div class="art-thumb at-3" data-art="2" data-bg="photos/Orange_5.jpg" style="background:url(photos/Orange_5.jpg) center/cover;background-size:cover">03</div>
+          <div class="art-thumb at-4" data-art="3" data-bg="photos/Orange_6.jpg" style="background:url(photos/Orange_6.jpg) center/cover;background-size:cover">04</div>
+          <div class="art-thumb at-5" data-art="4" data-bg="photos/banan-3.jpg" style="background:url(photos/banan-3.jpg) center/cover;background-size:cover">05</div>
+          <div class="art-thumb at-6" data-art="5" data-bg="photos/B5.jpg" style="background:url(photos/B5.jpg) center/cover;background-size:cover">06</div>
+        </div>
+      </div>
+
+      <p class="viz-section-title">Print Size</p>
+      <div class="control-group">
+        <div class="size-btns">
+          <button class="size-btn" data-size="0.18">A4</button>
+          <button class="size-btn active" data-size="0.26">A3</button>
+          <button class="size-btn" data-size="0.35">A2</button>
+          <button class="size-btn" data-size="0.46">A1</button>
+        </div>
+      </div>
+
+      <p class="viz-section-title">Frame Style</p>
+      <div class="control-group">
+        <div class="frame-btns">
+          <button class="frame-btn active" data-frame="black">Black</button>
+          <button class="frame-btn" data-frame="gold">Gold</button>
+          <button class="frame-btn" data-frame="white">White</button>
+          <button class="frame-btn" data-frame="none">None</button>
+        </div>
+      </div>
+    </aside>
+
+    <div>
+      <div class="viz-canvas" id="vizCanvas">
+        <!-- Room layers rendered by JS -->
+        <div class="room-wall" id="roomWall" style="position:absolute;inset:0;z-index:0"></div>
+        <svg id="roomScene" viewBox="0 0 700 500" xmlns="http://www.w3.org/2000/svg" style="position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none"></svg>
+        <!-- Draggable art piece -->
+        <div class="art-frame-wrap" id="artFrame" style="width:26%;aspect-ratio:4/3;top:22%;left:38%;position:absolute;z-index:10">
+          <div class="art-frame-inner" id="artFrameInner"></div>
+        </div>
+      </div>
+      <div class="viz-controls-bar">
+        <span class="viz-note">💡 Drag the artwork to reposition it. Changes update live.</span>
+        <a href="#shop" class="viz-add-btn">Shop This Print →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ AR WALL PREVIEW ═══ -->
+<section id="ar-preview">
+  <div class="ar-inner">
+    <div class="ar-text reveal">
+      <p class="section-label">AI Powered</p>
+      <h2 class="section-title">See it on <em>your</em><br>actual wall</h2>
+      <div class="divider"></div>
+      <p>Point your phone camera at any wall in your home and watch Joyce's art appear in real scale. No app download required — our browser-based AR viewer uses your camera instantly.</p>
+      <div class="ar-steps">
+        <div class="ar-step">
+          <span class="ar-step-num">01</span>
+          <div class="ar-step-text">
+            <h4>Choose your print</h4>
+            <p>Select any artwork from the collection and your desired size.</p>
+          </div>
+        </div>
+        <div class="ar-step">
+          <span class="ar-step-num">02</span>
+          <div class="ar-step-text">
+            <h4>Launch the viewer</h4>
+            <p>Tap "View on My Wall" and allow camera access.</p>
+          </div>
+        </div>
+        <div class="ar-step">
+          <span class="ar-step-num">03</span>
+          <div class="ar-step-text">
+            <h4>Point &amp; place</h4>
+            <p>Drag the artwork to find the perfect spot. Pinch to resize.</p>
+          </div>
+        </div>
+      </div>
+      <button class="ar-btn" onclick="openARModal()">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/></svg>
+        View on My Wall — Live
+      </button>
+      <div>
+        <div class="shipping-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4zM6 18.5c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5zm13.5-9l1.96 2.5H17V9.5h2.5zm-1.5 9c-.83 0-1.5-.67-1.5-1.5s.67-1.5 1.5-1.5 1.5.67 1.5 1.5-.67 1.5-1.5 1.5z"/></svg>
+          Free worldwide shipping on orders over £150
+        </div>
+      </div>
+    </div>
+    <div class="ar-phone-wrap reveal">
+      <div class="ar-badge">New Feature</div>
+      <div class="ar-phone">
+        <div class="ar-notch"></div>
+        <div class="ar-phone-screen">
+          <div class="ar-camera-feed">
+            <div class="ar-room-scene"></div>
+            <div class="ar-wall-art"></div>
+            <div class="ar-overlay-ui">
+              <div class="ar-corner ar-corner-tl"></div>
+              <div class="ar-corner ar-corner-tr"></div>
+              <div class="ar-corner ar-corner-bl"></div>
+              <div class="ar-corner ar-corner-br"></div>
+              <div class="ar-scan-line"></div>
+              <div class="ar-label">Detecting wall surface…</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ AR MODAL ═══ -->
+<div class="ar-modal" id="arModal">
+  <div class="ar-modal-inner">
+    <button class="ar-modal-close" onclick="closeARModal()">✕ Close</button>
+    <video class="ar-modal-video" id="arVideo" autoplay playsinline muted></video>
+    <div class="ar-modal-overlay" id="arOverlay">
+      <div class="ar-corner-scan ar-corner-scan-tl"></div>
+      <div class="ar-corner-scan ar-corner-scan-tr"></div>
+      <div class="ar-corner-scan ar-corner-scan-bl"></div>
+      <div class="ar-corner-scan ar-corner-scan-br"></div>
+      <div class="ar-modal-art" id="arArt" style="top:25%;left:25%">
+        <div class="ar-modal-art-img" id="arArtImg" style="background:url(photos/BR1.jpg) center top/cover;width:100%;height:100%"></div>
+      </div>
+    </div>
+    <div class="ar-modal-controls">
+      <button class="ar-modal-btn" onclick="arArtSmaller()">− Smaller</button>
+      <button class="ar-modal-btn" onclick="arArtLarger()">+ Larger</button>
+      <button class="ar-modal-btn" id="arNextArt" onclick="arCycleArt()">Next Artwork</button>
+      <button class="ar-modal-btn" style="background:rgba(184,146,74,0.3);border-color:rgba(184,146,74,0.5)" onclick="closeARModal();document.getElementById('shop').scrollIntoView({behavior:'smooth'})">Buy This Print</button>
+    </div>
+    <p class="ar-modal-hint">Drag the artwork to position it on your wall · Pinch to resize</p>
+  </div>
+</div>
+
+<!-- ═══ SERVICES ═══ -->
+<section id="services">
+  <div class="services-header reveal">
+    <p class="section-label">What We Offer</p>
+    <h2 class="section-title">Print <em>services</em> &amp; beyond</h2>
+    <p>Museum-quality printing on demand, worldwide shipping, and bespoke creative services for collectors and interior designers.</p>
+  </div>
+  <div class="services-grid reveal">
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><rect x="3" y="3" width="18" height="18" rx="1"/><path d="M3 9h18M9 21V9"/></svg>
+      <h3>Fine Art Prints</h3>
+      <p>Printed on demand using archival pigment inks on museum-grade Hahnemühle paper. Each print is inspected, signed, and shipped in protective tubes or flat packaging.</p>
+      <div class="service-price">From £40</div>
+      <div class="print-specs">
+        <span class="spec-tag">Hahnemühle Paper</span>
+        <span class="spec-tag">Archival Inks</span>
+        <span class="spec-tag">100yr Fade Resistant</span>
+        <span class="spec-tag">Sizes A5–A0</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+      <h3>Canvas &amp; Framed</h3>
+      <p>Gallery-wrapped canvas prints and custom-framed options in solid wood, metal, and lacquered finishes. Ready to hang, delivered worldwide.</p>
+      <div class="service-price">From £100</div>
+      <div class="print-specs">
+        <span class="spec-tag">Gallery Wrap</span>
+        <span class="spec-tag">Solid Wood Frames</span>
+        <span class="spec-tag">Metal Frames</span>
+        <span class="spec-tag">UV Glass</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+      <h3>Rush Printing</h3>
+      <p>Need it fast? Our express service guarantees print production within 24 hours and priority courier dispatch. Available on all standard sizes.</p>
+      <div class="service-price">+£25 supplement</div>
+      <div class="print-specs">
+        <span class="spec-tag">24hr Production</span>
+        <span class="spec-tag">Priority Courier</span>
+        <span class="spec-tag">Tracked Delivery</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M20 7H4a2 2 0 0 0-2 2v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2V9a2 2 0 0 0-2-2z"/><circle cx="12" cy="12" r="2"/></svg>
+      <h3>Worldwide Shipping</h3>
+      <p>All prints ship globally from our Sheffield studio. Standard shipping tracked to 48 countries. Free shipping on orders over £150. Express available.</p>
+      <div class="service-price">From £8.50</div>
+      <div class="print-specs">
+        <span class="spec-tag">48 Countries</span>
+        <span class="spec-tag">Fully Tracked</span>
+        <span class="spec-tag">Free over £150</span>
+        <span class="spec-tag">Express Available</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"/><path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"/></svg>
+      <h3>Custom Commissions</h3>
+      <p>Work directly with Joyce to create a bespoke piece for your home or business. From location shoots to large-scale installations for commercial spaces.</p>
+      <div class="service-price">From £500</div>
+      <div class="print-specs">
+        <span class="spec-tag">Bespoke Work</span>
+        <span class="spec-tag">Commercial Licensing</span>
+        <span class="spec-tag">Installation Service</span>
+      </div>
+    </div>
+    <div class="service-card">
+      <svg class="service-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg>
+      <h3>Interior Design</h3>
+      <p>Curated art curation service for interior designers and architects. Receive high-resolution files, room visualisations, and dedicated account management.</p>
+      <div class="service-price">Trade enquiries welcome</div>
+      <div class="print-specs">
+        <span class="spec-tag">Trade Pricing</span>
+        <span class="spec-tag">Hi-Res Files</span>
+        <span class="spec-tag">Account Manager</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SHOP ═══ -->
+<section id="shop">
+  <div class="shop-header reveal">
+    <div>
+      <p class="section-label">Print Shop</p>
+      <h2 class="section-title">Shop <em>Prints</em> &amp; Merch</h2>
+    </div>
+    <a href="#" class="btn-outline">View All →</a>
+  </div>
+  <div class="shop-grid reveal" id="shopGrid">
+    <!-- Cards rendered by JS -->
+  </div>
+</section>
+
+<!-- ═══ PRINT MODAL ═══ -->
+<div class="print-modal" id="printModal">
+  <div class="print-modal-inner">
+    <div class="pm-image" id="pmImage"></div>
+    <div class="pm-content">
+      <button class="pm-close" onclick="closePrintModal()">✕</button>
+      <h3 class="pm-title" id="pmTitle">Golden Hour at the Moors</h3>
+      <p class="pm-artist">Joyce Peters · Joycept</p>
+      <span class="pm-opt-label">Size</span>
+      <div class="pm-sizes" id="pmSizes">
+        <button class="pm-sz" data-price="22" data-size="A5 (15×21cm)">A5</button>
+        <button class="pm-sz active" data-price="40" data-size="A4 (21×30cm)">A4</button>
+        <button class="pm-sz" data-price="62" data-size="A3 (30×42cm)">A3</button>
+        <button class="pm-sz" data-price="100" data-size="A2 (42×59cm)">A2</button>
+        <button class="pm-sz" data-price="160" data-size="A1 (59×84cm)">A1</button>
+        <button class="pm-sz" data-price="225" data-size="A0 (84×119cm)">A0</button>
+      </div>
+      <span class="pm-opt-label">Edition</span>
+      <div class="pm-materials" style="margin-bottom:0.8rem">
+        <button class="pm-mat active" data-surcharge="0">Open Edition</button>
+        <button class="pm-mat" data-surcharge="60">Limited Edition (of 50)</button>
+        <button class="pm-mat" data-surcharge="120">Artist Proof (of 10)</button>
+      </div>
+      <span class="pm-opt-label">Material</span>
+      <div class="pm-materials">
+        <button class="pm-mat active" data-surcharge="0">Fine Art Paper</button>
+        <button class="pm-mat" data-surcharge="20">Canvas</button>
+        <button class="pm-mat" data-surcharge="35">Framed Print</button>
+        <button class="pm-mat" data-surcharge="55">Framed Canvas</button>
+      </div>
+      <div class="pm-qty">
+        <button class="pm-qty-btn" onclick="changeQty(-1)">−</button>
+        <span class="pm-qty-num" id="pmQty">1</span>
+        <button class="pm-qty-btn" onclick="changeQty(1)">+</button>
+      </div>
+      <div class="pm-total" id="pmTotal">£65</div>
+      <p class="pm-shipping">Limited edition of 50 · Numbered &amp; signed by Joyce Peters<br>Free shipping on orders over £150 · Tracked worldwide delivery</p>
+      <button class="pm-add-cart" onclick="addToCart()">Add to Cart</button>
+      <button class="pm-wishlist">Save to Wishlist</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══ CART SIDEBAR ═══ -->
+<div class="cart-sidebar" id="cartSidebar">
+  <div class="cart-header">
+    <h3 class="cart-title">Your Cart</h3>
+    <button class="cart-close" onclick="toggleCart()">✕</button>
+  </div>
+  <div class="cart-items" id="cartItems">
+    <p class="cart-empty">Your cart is empty.<br>Discover Joyce's collection above.</p>
+  </div>
+  <div class="cart-footer">
+    <div class="cart-subtotal">
+      <span class="cart-subtotal-label">Subtotal</span>
+      <span class="cart-subtotal-val" id="cartSubtotal">£0</span>
+    </div>
+    <p class="cart-shipping-note" id="cartShippingNote">Add £150 more for free worldwide shipping</p>
+    <a href="#" class="cart-checkout" onclick="openBasketPage();return false">Proceed to Checkout →</a>
+    <button class="cart-continue" onclick="toggleCart()">Continue Shopping</button>
+  </div>
+</div>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact">
+  <div class="contact-inner">
+    <div class="reveal">
+      <p class="section-label">Get in Touch</p>
+      <h2 class="section-title">Let's <em>create</em><br>something beautiful</h2>
+      <div class="divider"></div>
+      <div class="contact-info">
+        <h4>Studio & Enquiries</h4>
+        <p>Based in Sheffield, UK. Available for commissions, exhibitions, and trade partnerships worldwide.</p>
+        <div class="contact-links">
+          <a href="/cdn-cgi/l/email-protection#e088858c8c8fa08a8f9983859094ce838f8d" class="contact-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+            <span class="__cf_email__" data-cfemail="d1b9b4bdbdbe91bbbea8b2b4a1a5ffb2bebc">[email&#160;protected]</span>
+          </a>
+          <a href="tel:+441142000000" class="contact-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.39 2 2 0 0 1 3.6 1.21h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.91a16 16 0 0 0 6.1 6.1l.95-.95a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7a2 2 0 0 1 1.72 2.02z"/></svg>
+            +44 (0)114 200 0000
+          </a>
+          <a href="#" class="contact-link">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+            Sheffield, South Yorkshire, UK
+          </a>
+        </div>
+        <div class="social-links">
+          <a href="#" class="social-link" title="Instagram">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="social-link" title="Pinterest">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+          </a>
+          <a href="#" class="social-link" title="LinkedIn">
+            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+    <form class="contact-form reveal" onsubmit="submitForm(event)">
+      <div class="form-row">
+        <div class="form-group">
+          <label>First Name</label>
+          <input type="text" placeholder="Jane" required>
+        </div>
+        <div class="form-group">
+          <label>Last Name</label>
+          <input type="text" placeholder="Smith">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" placeholder="jane@example.com" required>
+      </div>
+      <div class="form-group">
+        <label>Enquiry Type</label>
+        <select>
+          <option>General Enquiry</option>
+          <option>Commission Request</option>
+          <option>Trade / Interior Design</option>
+          <option>Print Order Help</option>
+          <option>Exhibition / Collaboration</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Message</label>
+        <textarea placeholder="Tell Joyce about your project or enquiry…" required></textarea>
+      </div>
+      <div class="form-submit">
+        <button type="submit" class="btn-primary">Send Message</button>
+      </div>
+    </form>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer>
+  <div class="footer-grid">
+    <div class="footer-brand">
+      <a href="#" class="nav-logo">Joy<span>cept</span></a>
+      <p>Photography and fine art prints by Joyce Peters. Based in Sheffield, shipping beautiful art to collectors across 48 countries.</p>
+      <div class="shipping-badge">
+        <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor"><path d="M20 8h-3V4H3c-1.1 0-2 .9-2 2v11h2c0 1.66 1.34 3 3 3s3-1.34 3-3h6c0 1.66 1.34 3 3 3s3-1.34 3-3h2v-5l-3-4z"/></svg>
+        Worldwide shipping · Limited editions · Signed prints
+      </div>
+      <div class="footer-social" style="margin-top:1.5rem">
+        <a href="#" class="footer-social-link">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.5" fill="currentColor"/></svg>
+        </a>
+        <a href="#" class="footer-social-link">
+          <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor"><path d="M12 0C5.373 0 0 5.373 0 12c0 5.084 3.163 9.426 7.627 11.174-.105-.949-.2-2.405.042-3.441.218-.937 1.407-5.965 1.407-5.965s-.359-.719-.359-1.782c0-1.668.967-2.914 2.171-2.914 1.023 0 1.518.769 1.518 1.69 0 1.029-.655 2.568-.994 3.995-.283 1.194.599 2.169 1.777 2.169 2.133 0 3.772-2.249 3.772-5.495 0-2.873-2.064-4.882-5.012-4.882-3.414 0-5.418 2.561-5.418 5.207 0 1.031.397 2.138.893 2.738a.36.36 0 0 1 .083.345l-.333 1.36c-.053.22-.174.267-.402.161-1.499-.698-2.436-2.889-2.436-4.649 0-3.785 2.75-7.262 7.929-7.262 4.163 0 7.398 2.967 7.398 6.931 0 4.136-2.607 7.464-6.227 7.464-1.216 0-2.359-.632-2.75-1.378l-.748 2.853c-.271 1.043-1.002 2.35-1.492 3.146C9.57 23.812 10.763 24 12 24c6.627 0 12-5.373 12-12S18.627 0 12 0z"/></svg>
+        </a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Shop</h4>
+      <ul class="footer-links">
+        <li><a href="#shop">All Prints</a></li>
+        <li><a href="#shop">New Arrivals</a></li>
+        <li><a href="#shop">Limited Editions</a></li>
+        <li><a href="#shop">Merch</a></li>
+        <li><a href="#shop">Gift Cards</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Services</h4>
+      <ul class="footer-links">
+        <li><a href="#services">Fine Art Prints</a></li>
+        <li><a href="#services">Canvas & Framed</a></li>
+        <li><a href="#services">Commissions</a></li>
+        <li><a href="#services">Rush Printing</a></li>
+        <li><a href="#services">Trade Enquiries</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Information</h4>
+      <ul class="footer-links">
+        <li><a href="#about">About Joyce</a></li>
+        <li><a href="#contact">Contact</a></li>
+        <li><a href="#">Shipping Policy</a></li>
+        <li><a href="#">Returns</a></li>
+        <li><a href="#">FAQ</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p class="footer-copy">© 2026 Joycept — Joyce Peters. All rights reserved. Sheffield, UK.</p>
+    <div class="footer-legal">
+      <a href="#">Privacy Policy</a>
+      <a href="#">Terms</a>
+      <a href="#">Cookie Settings</a>
+    </div>
+  </div>
+</footer>
+
+<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+// ── CUSTOM CURSOR ──
+(function(){
+  var dot = document.getElementById('cursor');
+  var ring = document.getElementById('cursorRing');
+  if(!dot || !ring) return;
+  var mouseX=0,mouseY=0,ringX=0,ringY=0;
+  document.addEventListener('mousemove',function(e){
+    mouseX=e.clientX; mouseY=e.clientY;
+    dot.style.display='block';
+    ring.style.display='block';
+    dot.style.transform='translate('+(mouseX-6)+'px,'+(mouseY-6)+'px)';
+  });
+  (function animRing(){
+    ringX+=(mouseX-ringX)*0.12;
+    ringY+=(mouseY-ringY)*0.12;
+    ring.style.transform='translate('+(ringX-20)+'px,'+(ringY-20)+'px)';
+    requestAnimationFrame(animRing);
+  })();
+  document.addEventListener('mouseover',function(e){
+    var t=e.target.closest('a,button,.shop-card,.portfolio-item,.swatch,.room-thumb,.art-thumb');
+    if(t){dot.style.width='20px';dot.style.height='20px';ring.style.width='56px';ring.style.height='56px';ring.style.opacity='0.4';}
+    else{dot.style.width='12px';dot.style.height='12px';ring.style.width='40px';ring.style.height='40px';ring.style.opacity='0.7';}
+  });
+})();
+
+// ── NAV SCROLL ──
+window.addEventListener('scroll',()=>{
+  document.getElementById('navbar').classList.toggle('scrolled',window.scrollY>60);
+});
+
+// ── SCROLL REVEAL ──
+const observer=new IntersectionObserver(entries=>{entries.forEach(e=>{if(e.isIntersecting)e.target.classList.add('visible')})},{threshold:0.1});
+document.querySelectorAll('.reveal').forEach(el=>observer.observe(el));
+
+// ── PORTFOLIO FILTERS ──
+document.querySelectorAll('.filter-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    const f=btn.dataset.filter;
+    document.querySelectorAll('.portfolio-item').forEach(item=>{
+      item.style.opacity=(f==='all'||item.dataset.category===f)?'1':'0.2';
+      item.style.transition='opacity 0.4s';
+    });
+  });
+});
+
+// ── SHOP PRODUCTS ──
+const products=[
+  {name:'Bad Romance',cat:'Portrait',price:'£40',bg:'photos/BR1.jpg',badge:'new'},
+  {name:'Bad Romance 2.0',cat:'Portrait',price:'£40',bg:'photos/BRBff.jpg',badge:''},
+  {name:'Orange 01',cat:'The Fruition',price:'£40',bg:'photos/Orange_5.jpg',badge:'ltd'},
+  {name:'Orange 02',cat:'The Fruition',price:'£40',bg:'photos/Orange_6.jpg',badge:''},
+  {name:'Banana 01',cat:'The Fruition',price:'£40',bg:'photos/banan-3.jpg',badge:'new'},
+  {name:'Banana 02',cat:'The Fruition',price:'£40',bg:'photos/B5.jpg',badge:''},
+  {name:'Banana 02',cat:'The Fruition',price:'£40',bg:'photos/B5.jpg',badge:''},
+  {name:'Strawberry 01',cat:'The Fruition',price:'£40',bg:'photos/strawberry-1.jpg',badge:'new'},
+  {name:'Strawberry 02',cat:'The Fruition',price:'£40',bg:'photos/strawberry-3.jpg',badge:''},
+  {name:'Watermelon 01',cat:'The Fruition',price:'£40',bg:'photos/wmelon-5_small_size.jpg',badge:'new'},
+  {name:'Watermelon 02',cat:'The Fruition',price:'£40',bg:'photos/wmelon-grillz_dia.jpg',badge:''},
+  {name:'Lychee 01',cat:'The Fruition',price:'£40',bg:'photos/Lychee-1.jpg',badge:'new'},
+  {name:'Lychee 02',cat:'The Fruition',price:'£40',bg:'photos/Lychee-2.jpg',badge:''},
+  {name:'Grape 01',cat:'The Fruition',price:'£40',bg:'photos/G1_proto.jpg',badge:'new'},
+  {name:'Grape 02',cat:'The Fruition',price:'£40',bg:'photos/G2_proto.jpg',badge:''},
+  {name:'Blackberry 01',cat:'The Fruition',price:'£40',bg:'photos/bb_copy.jpg',badge:'new'},
+  {name:'Blackberry 02',cat:'The Fruition',price:'£40',bg:'photos/bb4.jpg',badge:''},
+  {name:'Avocado 01',cat:'The Fruition',price:'£40',bg:'photos/Avo-2.jpg',badge:'new'},
+  {name:'Avocado 02',cat:'The Fruition',price:'£40',bg:'photos/Avo-3.jpg',badge:''},
+  {name:'Avocado 03',cat:'The Fruition',price:'£40',bg:'photos/Avo-4.jpg',badge:''},
+  {name:'Tote Bag — Warmth',cat:'Merch',price:'£28',bg:'linear-gradient(135deg,#d4b8a0,#5a3820)',badge:''},
+  {name:'Greeting Cards — Set of 6',cat:'Merch',price:'£40',bg:'linear-gradient(135deg,#c4d4b8,#2a3a18)',badge:'new'},
+];
+const grid=document.getElementById('shopGrid');
+products.forEach((p,i)=>{
+  const c=document.createElement('div');
+  c.className='shop-card';
+  c.innerHTML=`
+    <div class="shop-img">
+      <div class="shop-img-ph" style="background:url('${p.bg}') center top/cover;width:100%;height:100%"></div>
+      ${p.badge?`<span class="shop-badge badge-${p.badge}">${p.badge==='new'?'New':'Ltd Ed'}</span>`:''}
+      <div class="shop-quick-view" onclick="openPrintModal('${p.name}','${p.price}')">Quick View</div>
+    </div>
+    <div class="shop-info">
+      <p class="shop-cat">${p.cat}</p>
+      <p class="shop-name">${p.name}</p>
+      <div class="shop-price-row">
+        <span class="shop-price">${p.price}</span>
+        <button class="shop-add" onclick="openPrintModal('${p.name}','${p.price}')">+ Add</button>
+      </div>
+    </div>`;
+  grid.appendChild(c);
+});
+
+// ── PRINT MODAL ──
+let currentPrice=65,currentQty=1,currentSurcharge=0,currentTitle='';
+function openPrintModal(title,price){
+  currentTitle=title;
+  const num=parseInt(price.replace('£',''));
+  currentPrice=num;currentQty=1;currentSurcharge=0;
+  document.getElementById('pmTitle').textContent=title;
+  document.querySelectorAll('.pm-sz').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.pm-sz')[1].classList.add('active');
+  document.querySelectorAll('.pm-mat').forEach(b=>b.classList.remove('active'));
+  document.querySelectorAll('.pm-mat')[0].classList.add('active');
+  document.getElementById('pmQty').textContent='1';
+  updatePMTotal();
+  document.getElementById('printModal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closePrintModal(){
+  document.getElementById('printModal').classList.remove('open');
+  document.body.style.overflow='';
+}
+document.querySelectorAll('.pm-sz').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.pm-sz').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentPrice=parseInt(btn.dataset.price);
+    updatePMTotal();
+  });
+});
+document.querySelectorAll('.pm-mat').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.pm-mat').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentSurcharge=parseInt(btn.dataset.surcharge);
+    updatePMTotal();
+  });
+});
+function changeQty(d){currentQty=Math.max(1,currentQty+d);document.getElementById('pmQty').textContent=currentQty;updatePMTotal()}
+function updatePMTotal(){document.getElementById('pmTotal').textContent='£'+((currentPrice+currentSurcharge)*currentQty)}
+document.getElementById('printModal').addEventListener('click',e=>{if(e.target===document.getElementById('printModal'))closePrintModal()});
+
+// ── CART ──
+let cart=[];
+function toggleCart(){
+  const s=document.getElementById('cartSidebar');
+  s.classList.toggle('open');
+  document.body.style.overflow=s.classList.contains('open')?'hidden':'';
+}
+document.getElementById('cartToggle').addEventListener('click',e=>{e.preventDefault();toggleCart()});
+function addToCart(){
+  const activeSz=document.querySelector('.pm-sz.active');
+  const activeMat=document.querySelector('.pm-mat.active');
+  const item={title:currentTitle,size:activeSz?activeSz.dataset.size:'A4',material:activeMat?activeMat.textContent:'Fine Art Paper',price:(currentPrice+currentSurcharge),qty:currentQty,bg:document.querySelectorAll('.art-thumb.active')[0]?.dataset.bg||'linear-gradient(135deg,#7a9a8a,#1a2e28)'};
+  cart.push(item);
+  renderCart();
+  closePrintModal();
+  toggleCart();
+}
+function renderCart(){
+  const el=document.getElementById('cartItems');
+  const count=document.getElementById('cartCount');
+  const subtotalEl=document.getElementById('cartSubtotal');
+  const noteEl=document.getElementById('cartShippingNote');
+  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  count.textContent=cart.length;
+  subtotalEl.textContent='£'+total;
+  noteEl.textContent=total>=150?'✓ Free worldwide shipping applied!':'Add £'+(150-total)+' more for free shipping';
+  noteEl.style.color=total>=150?'#7a9a8a':'var(--gold)';
+  if(cart.length===0){el.innerHTML='<p class="cart-empty">Your cart is empty.<br>Discover Joyce\'s collection above.</p>';return}
+  el.innerHTML=cart.map((item,i)=>`
+    <div class="cart-item">
+      <div class="cart-item-img"><div class="ci-img" style="background:${item.bg};width:70px;height:70px"></div></div>
+      <div>
+        <p class="cart-item-name">${item.title}</p>
+        <p class="cart-item-details">${item.size} · ${item.material} · Qty ${item.qty}</p>
+        <button class="cart-item-remove" onclick="removeCartItem(${i})">Remove</button>
+      </div>
+      <span class="cart-item-price">£${item.price*item.qty}</span>
+    </div>`).join('');
+}
+function removeCartItem(i){cart.splice(i,1);renderCart()}
+
+// ── ROOM VISUALIZER ──
+const roomConfigs={
+  living:{wall:'#f0e8d8'},
+  bedroom:{wall:'#e8eef4'},
+  dining:{wall:'#ede4d8'}
+};
+let currentRoom='living',currentWallColor='#ede4d2',currentArtBg='linear-gradient(135deg,#7a9a8a,#1a2e28)',currentSize=0.26,currentFrame='black';
+
+function drawRoom(){
+  const wall=document.getElementById('roomWall');
+  const canvas=document.getElementById('vizCanvas');
+
+  const scenes={
+    living:{
+      bg:'#f0e8d8',
+      svgScene:`
+        <!-- Floor -->
+        <rect x="0" y="320" width="700" height="180" fill="#c4a882"/>
+        <rect x="0" y="320" width="700" height="8" fill="#b89870"/>
+        <!-- Floor planks -->
+        ${Array.from({length:12},(_,i)=>`<line x1="${i*60}" y1="320" x2="${i*60+40}" y2="500" stroke="#b08860" stroke-width="1" opacity="0.4"/>`).join('')}
+        <!-- Back wall (will be coloured by wall colour picker) -->
+        <!-- Skirting board -->
+        <rect x="0" y="312" width="700" height="8" fill="#e8dcc8"/>
+        <!-- Large sofa -->
+        <rect x="80" y="240" width="340" height="80" rx="8" fill="#8a7060"/>
+        <rect x="80" y="240" width="340" height="25" rx="6" fill="#9a8070"/>
+        <rect x="80" y="240" width="25" height="80" rx="6" fill="#9a8070"/>
+        <rect x="395" y="240" width="25" height="80" rx="6" fill="#9a8070"/>
+        <!-- Cushions -->
+        <rect x="105" y="248" width="70" height="55" rx="4" fill="#c4a882" opacity="0.8"/>
+        <rect x="185" y="248" width="70" height="55" rx="4" fill="#b89878" opacity="0.8"/>
+        <rect x="265" y="248" width="70" height="55" rx="4" fill="#c4a882" opacity="0.8"/>
+        <!-- Side table -->
+        <rect x="460" y="270" width="60" height="50" rx="4" fill="#7a6050"/>
+        <rect x="455" y="266" width="70" height="8" rx="2" fill="#8a7060"/>
+        <!-- Lamp on table -->
+        <rect x="483" y="210" width="8" height="58" fill="#9a8870"/>
+        <ellipse cx="487" cy="210" rx="28" ry="16" fill="#f0e0c0" opacity="0.9"/>
+        <ellipse cx="487" cy="210" rx="28" ry="4" fill="#e8d0a0" opacity="0.6"/>
+        <!-- Plant -->
+        <rect x="595" y="280" width="30" height="40" rx="3" fill="#7a6050"/>
+        <ellipse cx="610" cy="265" rx="25" ry="30" fill="#6a8a60" opacity="0.9"/>
+        <ellipse cx="600" cy="258" rx="18" ry="22" fill="#5a7a50" opacity="0.7"/>
+        <ellipse cx="622" cy="255" rx="15" ry="18" fill="#7a9a70" opacity="0.7"/>
+        <!-- Coffee table -->
+        <rect x="155" y="295" width="190" height="25" rx="4" fill="#8a7060"/>
+        <rect x="170" y="318" width="10" height="12" fill="#7a6050"/>
+        <rect x="325" y="318" width="10" height="12" fill="#7a6050"/>
+        <!-- Book on table -->
+        <rect x="195" y="289" width="45" height="8" rx="2" fill="#c4a882"/>
+        <rect x="248" y="291" width="30" height="6" rx="2" fill="#b89878"/>
+        <!-- Rug -->
+        <ellipse cx="280" cy="350" rx="200" ry="40" fill="#b8a890" opacity="0.5"/>
+        <ellipse cx="280" cy="350" rx="180" ry="33" fill="none" stroke="#a89880" stroke-width="2" opacity="0.4"/>
+        <!-- Shadow under sofa -->
+        <ellipse cx="250" cy="322" rx="170" ry="10" fill="rgba(0,0,0,0.12)"/>
+        <!-- Picture rail -->
+        <rect x="0" y="95" width="700" height="4" fill="rgba(0,0,0,0.08)"/>
+        <!-- Ceiling coving -->
+        <rect x="0" y="0" width="700" height="12" fill="rgba(255,255,255,0.3)"/>
+        <!-- Ambient light from left -->
+        <rect x="0" y="0" width="120" height="500" fill="url(#leftLight)" opacity="0.15"/>
+      `
+    },
+    bedroom:{
+      bg:'#e8eef4',
+      svgScene:`
+        <!-- Floor -->
+        <rect x="0" y="320" width="700" height="180" fill="#d4c8b8"/>
+        <rect x="0" y="320" width="700" height="6" fill="#c4b8a8"/>
+        <!-- Soft carpet texture -->
+        ${Array.from({length:30},(_,i)=>`<line x1="${Math.random()*700}" y1="326" x2="${Math.random()*700}" y2="500" stroke="#c0b4a4" stroke-width="0.5" opacity="0.3"/>`).join('')}
+        <!-- Bed frame -->
+        <rect x="120" y="200" width="320" height="130" rx="6" fill="#c8b8a8"/>
+        <!-- Headboard -->
+        <rect x="120" y="160" width="320" height="60" rx="10" fill="#b8a898"/>
+        <rect x="135" y="170" width="290" height="40" rx="8" fill="#c8b8a8"/>
+        <!-- Bedding -->
+        <rect x="120" y="230" width="320" height="100" rx="4" fill="#f0ece4"/>
+        <!-- Pillow 1 -->
+        <rect x="135" y="215" width="110" height="45" rx="8" fill="white" opacity="0.9"/>
+        <!-- Pillow 2 -->
+        <rect x="260" y="215" width="110" height="45" rx="8" fill="#f4f0e8" opacity="0.9"/>
+        <!-- Blanket fold -->
+        <rect x="120" y="255" width="320" height="20" rx="2" fill="#e0dcd0"/>
+        <!-- Bed legs -->
+        <rect x="128" y="318" width="14" height="8" rx="2" fill="#a89888"/>
+        <rect x="418" y="318" width="14" height="8" rx="2" fill="#a89888"/>
+        <!-- Bedside table left -->
+        <rect x="30" y="248" width="75" height="75" rx="4" fill="#b0a090"/>
+        <rect x="25" y="244" width="85" height="10" rx="2" fill="#c0b0a0"/>
+        <!-- Lamp left -->
+        <rect x="58" y="190" width="8" height="57" fill="#a09080"/>
+        <ellipse cx="62" cy="190" rx="26" ry="14" fill="#fef0d0" opacity="0.95"/>
+        <!-- Book on table -->
+        <rect x="38" y="250" width="40" height="6" rx="2" fill="#9a8878"/>
+        <!-- Bedside table right -->
+        <rect x="455" y="248" width="75" height="75" rx="4" fill="#b0a090"/>
+        <rect x="450" y="244" width="85" height="10" rx="2" fill="#c0b0a0"/>
+        <!-- Lamp right -->
+        <rect x="483" y="190" width="8" height="57" fill="#a09080"/>
+        <ellipse cx="487" cy="190" rx="26" ry="14" fill="#fef0d0" opacity="0.95"/>
+        <!-- Plant right -->
+        <rect x="580" y="278" width="28" height="45" rx="3" fill="#9a8878"/>
+        <ellipse cx="594" cy="262" rx="22" ry="26" fill="#7a9878"/>
+        <ellipse cx="585" cy="255" rx="14" ry="18" fill="#6a8868"/>
+        <!-- Rug -->
+        <rect x="160" y="318" width="240" height="60" rx="4" fill="#c8c0b0" opacity="0.5"/>
+        <!-- Shadow under bed -->
+        <ellipse cx="280" cy="322" rx="160" ry="8" fill="rgba(0,0,0,0.1)"/>
+        <!-- Curtain hint left -->
+        <rect x="0" y="0" width="40" height="320" fill="#d4c8b8" opacity="0.4"/>
+        <!-- Skirting -->
+        <rect x="0" y="314" width="700" height="6" fill="#e4dcd0"/>
+      `
+    },
+    dining:{
+      bg:'#ede4d8',
+      svgScene:`
+        <!-- Floor - dark wood -->
+        <rect x="0" y="320" width="700" height="180" fill="#8a6840"/>
+        <rect x="0" y="320" width="700" height="6" fill="#7a5830"/>
+        <!-- Floor planks -->
+        ${Array.from({length:8},(_,i)=>`<rect x="${i*90}" y="320" width="88" height="180" fill="none" stroke="#7a5830" stroke-width="1.5" opacity="0.5"/>`).join('')}
+        <!-- Dining table -->
+        <ellipse cx="310" cy="310" rx="200" ry="55" fill="#6a5040"/>
+        <ellipse cx="310" cy="305" rx="200" ry="52" fill="#8a6848"/>
+        <!-- Table edge highlight -->
+        <ellipse cx="310" cy="305" rx="200" ry="52" fill="none" stroke="#9a7858" stroke-width="3" opacity="0.5"/>
+        <!-- Table legs -->
+        <rect x="185" y="318" width="12" height="20" rx="3" fill="#5a4030"/>
+        <rect x="423" y="318" width="12" height="20" rx="3" fill="#5a4030"/>
+        <!-- Chairs -->
+        <rect x="120" y="268" width="65" height="55" rx="6" fill="#5a6878"/>
+        <rect x="120" y="248" width="65" height="28" rx="6" fill="#6a7888"/>
+        <rect x="430" y="268" width="65" height="55" rx="6" fill="#5a6878"/>
+        <rect x="430" y="248" width="65" height="28" rx="6" fill="#6a7888"/>
+        <rect x="238" y="315" width="55" height="45" rx="6" fill="#5a6878"/>
+        <rect x="238" y="295" width="55" height="26" rx="6" fill="#6a7888"/>
+        <rect x="322" y="315" width="55" height="45" rx="6" fill="#5a6878"/>
+        <rect x="322" y="295" width="55" height="26" rx="6" fill="#6a7888"/>
+        <!-- Table setting -->
+        <ellipse cx="230" cy="295" rx="28" ry="20" fill="#f0e8d8" opacity="0.8"/>
+        <ellipse cx="310" cy="285" rx="28" ry="20" fill="#f0e8d8" opacity="0.8"/>
+        <ellipse cx="390" cy="295" rx="28" ry="20" fill="#f0e8d8" opacity="0.8"/>
+        <!-- Candle centrepiece -->
+        <rect x="298" y="258" width="8" height="28" fill="#f0f0e0"/>
+        <ellipse cx="302" cy="257" rx="5" ry="3" fill="#ffcc44" opacity="0.9"/>
+        <rect x="316" y="262" width="6" height="22" fill="#f0f0e0"/>
+        <ellipse cx="319" cy="261" rx="4" ry="2.5" fill="#ffcc44" opacity="0.9"/>
+        <!-- Vase -->
+        <rect x="275" y="262" width="18" height="24" rx="3" fill="#9a8878"/>
+        <ellipse cx="284" cy="258" rx="20" ry="12" fill="#7a9868" opacity="0.8"/>
+        <!-- Pendant light -->
+        <line x1="310" y1="0" x2="310" y2="100" stroke="#888" stroke-width="2"/>
+        <ellipse cx="310" cy="115" rx="55" ry="20" fill="#c8b898"/>
+        <ellipse cx="310" cy="100" rx="40" ry="10" fill="#d8c8a8"/>
+        <!-- Glow from pendant -->
+        <ellipse cx="310" cy="200" rx="150" ry="60" fill="#fff8e0" opacity="0.12"/>
+        <!-- Sideboard -->
+        <rect x="535" y="240" width="130" height="90" rx="4" fill="#7a6050"/>
+        <rect x="530" y="235" width="140" height="10" rx="2" fill="#8a7060"/>
+        <rect x="556" y="278" width="40" height="5" rx="2" fill="#9a8070" opacity="0.5"/>
+        <!-- Vase on sideboard -->
+        <rect x="570" y="195" width="22" height="42" rx="4" fill="#8a9878"/>
+        <ellipse cx="581" cy="190" rx="18" ry="10" fill="#6a8868"/>
+        <!-- Shadow under table -->
+        <ellipse cx="310" cy="328" rx="195" ry="15" fill="rgba(0,0,0,0.18)"/>
+        <!-- Skirting -->
+        <rect x="0" y="314" width="700" height="6" fill="#e0d4c4"/>
+      `
+    }
+  };
+
+  const scene = scenes[currentRoom] || scenes.living;
+  const vizEl = document.getElementById('vizCanvas');
+  const svgEl = vizEl.querySelector('svg') || vizEl;
+
+  // Update wall colour
+  if(wall) wall.style.background = currentWallColor;
+
+  const existingScene = document.getElementById('roomScene');
+  if(existingScene){
+    existingScene.innerHTML = `
+      <defs>
+        <linearGradient id="leftLight" x1="0" y1="0" x2="1" y2="0">
+          <stop offset="0%" stop-color="white" stop-opacity="0.3"/>
+          <stop offset="100%" stop-color="white" stop-opacity="0"/>
+        </linearGradient>
+      </defs>
+      ${scene.svgScene}
+    `;
+  }
+}
+
+
+function updateArtFrame(){
+  const frame=document.getElementById('artFrame');
+  const inner=document.getElementById('artFrameInner');
+  const borderColors={black:'#1a1a1a',gold:'#b8924a',white:'#f0ece4',none:'transparent'};
+  const bw=currentFrame==='none'?0:8;
+  frame.style.outline=`${bw}px solid ${borderColors[currentFrame]}`;
+  frame.style.width=(currentSize*100)+'%';
+  inner.style.background="url('"+currentArtBg+"') center/cover";
+  if(currentFrame!=='none'){
+    inner.style.boxShadow='inset 0 0 0 12px rgba(255,255,255,0.9)';
+  }else{
+    inner.style.boxShadow='none';
+  }
+  frame.style.boxShadow='0 20px 60px rgba(0,0,0,0.25)';
+}
+
+// Room style buttons
+document.querySelectorAll('.room-thumb').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.room-thumb').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentRoom=btn.dataset.room;
+    currentWallColor=roomConfigs[currentRoom].wall;
+    // Update active swatch
+    document.querySelectorAll('#wallSwatches .swatch').forEach(s=>{
+      s.classList.toggle('active',s.dataset.color===currentWallColor);
+    });
+    drawRoom();updateArtFrame();
+  });
+});
+
+// Wall swatches
+document.querySelectorAll('#wallSwatches .swatch').forEach(s=>{
+  s.addEventListener('click',()=>{
+    document.querySelectorAll('#wallSwatches .swatch').forEach(sw=>sw.classList.remove('active'));
+    s.classList.add('active');
+    currentWallColor=s.dataset.color;
+    drawRoom();
+  });
+});
+
+// Art thumbs
+document.querySelectorAll('#artThumbs .art-thumb').forEach(t=>{
+  t.addEventListener('click',()=>{
+    document.querySelectorAll('#artThumbs .art-thumb').forEach(a=>a.classList.remove('active'));
+    t.classList.add('active');
+    currentArtBg=t.dataset.bg;
+    updateArtFrame();
+  });
+});
+
+// Size buttons
+document.querySelectorAll('.size-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.size-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentSize=parseFloat(btn.dataset.size);
+    updateArtFrame();
+  });
+});
+
+// Frame buttons
+document.querySelectorAll('.frame-btn').forEach(btn=>{
+  btn.addEventListener('click',()=>{
+    document.querySelectorAll('.frame-btn').forEach(b=>b.classList.remove('active'));
+    btn.classList.add('active');
+    currentFrame=btn.dataset.frame;
+    updateArtFrame();
+  });
+});
+
+// Draggable art frame
+(function(){
+  const el=document.getElementById('artFrame');
+  const canvas=document.getElementById('vizCanvas');
+  let dragging=false,ox=0,oy=0,startLeft=0,startTop=0;
+  el.addEventListener('mousedown',e=>{
+    dragging=true;
+    const r=canvas.getBoundingClientRect();
+    const er=el.getBoundingClientRect();
+    ox=e.clientX-er.left;
+    oy=e.clientY-er.top;
+    el.style.cursor='grabbing';
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove',e=>{
+    if(!dragging)return;
+    const r=canvas.getBoundingClientRect();
+    let x=(e.clientX-r.left-ox)/r.width*100;
+    let y=(e.clientY-r.top-oy)/r.height*100;
+    x=Math.max(0,Math.min(x,90));
+    y=Math.max(0,Math.min(y,60));
+    el.style.left=x+'%';
+    el.style.top=y+'%';
+  });
+  document.addEventListener('mouseup',()=>{dragging=false;el.style.cursor='move'});
+  // Touch
+  el.addEventListener('touchstart',e=>{
+    dragging=true;
+    const r=canvas.getBoundingClientRect();
+    const t=e.touches[0];
+    const er=el.getBoundingClientRect();
+    ox=t.clientX-er.left;oy=t.clientY-er.top;
+    e.preventDefault();
+  },{passive:false});
+  document.addEventListener('touchmove',e=>{
+    if(!dragging)return;
+    const r=canvas.getBoundingClientRect();
+    const t=e.touches[0];
+    let x=(t.clientX-r.left-ox)/r.width*100;
+    let y=(t.clientY-r.top-oy)/r.height*100;
+    x=Math.max(0,Math.min(x,90));y=Math.max(0,Math.min(y,60));
+    el.style.left=x+'%';el.style.top=y+'%';
+    e.preventDefault();
+  },{passive:false});
+  document.addEventListener('touchend',()=>{dragging=false});
+})();
+
+// Init visualizer
+drawRoom();
+updateArtFrame();
+
+// ── AR WALL VIEWER ──
+let arStream=null;
+let arArtIndex=0;
+const arArtworks=['photos/BR1.jpg','photos/BRBff.jpg','photos/Orange_5.jpg','photos/Orange_6.jpg','photos/banan-3.jpg'];
+let arArtSize=45;
+let arDragging=false,arOx=0,arOy=0;
+const arArtEl=document.getElementById('arArt');
+const arArtImgEl=document.getElementById('arArtImg');
+
+async function openARModal(){
+  const modal=document.getElementById('arModal');
+  modal.classList.add('open');
+  document.body.style.overflow='hidden';
+  try{
+    arStream=await navigator.mediaDevices.getUserMedia({video:{facingMode:'environment'},audio:false});
+    document.getElementById('arVideo').srcObject=arStream;
+  }catch(e){
+    alert('Camera access is required for the AR viewer. Please allow camera access and try again.');
+    closeARModal();
+  }
+  // Setup drag
+  setupARDrag();
+}
+
+function closeARModal(){
+  document.getElementById('arModal').classList.remove('open');
+  document.body.style.overflow='';
+  if(arStream){arStream.getTracks().forEach(t=>t.stop());arStream=null}
+  document.getElementById('arVideo').srcObject=null;
+}
+
+function arArtSmaller(){arArtSize=Math.max(15,arArtSize-8);arArtEl.style.width=arArtSize+'%'}
+function arArtLarger(){arArtSize=Math.min(80,arArtSize+8);arArtEl.style.width=arArtSize+'%'}
+function arCycleArt(){arArtIndex=(arArtIndex+1)%arArtworks.length;arArtImgEl.style.background="url('"+arArtworks[arArtIndex]+"') center top/cover"}
+
+function setupARDrag(){
+  const overlay=document.getElementById('arOverlay');
+  arArtEl.addEventListener('mousedown',e=>{
+    arDragging=true;
+    const r=overlay.getBoundingClientRect();
+    const er=arArtEl.getBoundingClientRect();
+    arOx=e.clientX-er.left;arOy=e.clientY-er.top;
+    e.preventDefault();
+  });
+  document.addEventListener('mousemove',e=>{
+    if(!arDragging)return;
+    const r=overlay.getBoundingClientRect();
+    let x=(e.clientX-r.left-arOx)/r.width*100;
+    let y=(e.clientY-r.top-arOy)/r.height*100;
+    x=Math.max(0,Math.min(x,85));y=Math.max(0,Math.min(y,80));
+    arArtEl.style.left=x+'%';arArtEl.style.top=y+'%';
+  });
+  document.addEventListener('mouseup',()=>{arDragging=false});
+  // Touch drag
+  arArtEl.addEventListener('touchstart',e=>{
+    arDragging=true;
+    const r=overlay.getBoundingClientRect();
+    const t=e.touches[0];
+    const er=arArtEl.getBoundingClientRect();
+    arOx=t.clientX-er.left;arOy=t.clientY-er.top;
+    e.preventDefault();
+  },{passive:false});
+  document.addEventListener('touchmove',e=>{
+    if(!arDragging)return;
+    const r=overlay.getBoundingClientRect();
+    const t=e.touches[0];
+    let x=(t.clientX-r.left-arOx)/r.width*100;
+    let y=(t.clientY-r.top-arOy)/r.height*100;
+    x=Math.max(0,Math.min(x,85));y=Math.max(0,Math.min(y,80));
+    arArtEl.style.left=x+'%';arArtEl.style.top=y+'%';
+    e.preventDefault();
+  },{passive:false});
+  document.addEventListener('touchend',()=>{arDragging=false});
+}
+
+
+// ── BASKET PAGE ──
+function openBasketPage(){
+  toggleCart();
+  renderBasketPage();
+  document.getElementById('basketPage').style.display='block';
+  document.body.style.overflow='hidden';
+}
+function closeBasketPage(){
+  document.getElementById('basketPage').style.display='none';
+  document.body.style.overflow='';
+}
+function renderBasketPage(){
+  const el=document.getElementById('basketPageItems');
+  const sumEl=document.getElementById('basketPageSummary');
+  const countEl=document.getElementById('basketItemCount');
+  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const shipping=total>=150?0:8.50;
+  const grandTotal=total+shipping;
+  countEl.textContent=cart.length+' item'+(cart.length!==1?'s':'');
+
+  if(cart.length===0){
+    el.innerHTML='<div style="text-align:center;padding:4rem 0"><p style="font-family:Cormorant Garamond,serif;font-size:1.4rem;color:var(--brown);margin-bottom:1rem">Your basket is empty</p><a href="#" onclick="closeBasketPage();return false" style="font-size:0.7rem;letter-spacing:0.18em;text-transform:uppercase;color:var(--gold);text-decoration:none">← Discover the Collection</a></div>';
+    sumEl.innerHTML='';
+    return;
+  }
+
+  el.innerHTML=cart.map((item,i)=>`
+    <div style="display:grid;grid-template-columns:80px 1fr auto;gap:1.2rem;align-items:center;padding:1.2rem 0;border-bottom:1px solid var(--cream-dark)">
+      <div style="width:80px;height:80px;background:url('${item.bg}') center/cover;background-color:#e8e0d0"></div>
+      <div>
+        <p style="font-family:'Cormorant Garamond',serif;font-size:1.1rem;color:var(--brown);margin-bottom:0.3rem">${item.title}</p>
+        <p style="font-size:0.72rem;color:var(--text-mid);margin-bottom:0.5rem">${item.size} · ${item.material}</p>
+        <div style="display:flex;align-items:center;gap:0.8rem">
+          <button onclick="changeBasketQty(${i},-1)" style="width:26px;height:26px;border:1px solid var(--cream-dark);background:transparent;font-size:1rem;cursor:none;color:var(--brown)">−</button>
+          <span style="font-size:0.82rem;color:var(--brown)">${item.qty}</span>
+          <button onclick="changeBasketQty(${i},1)" style="width:26px;height:26px;border:1px solid var(--cream-dark);background:transparent;font-size:1rem;cursor:none;color:var(--brown)">+</button>
+          <button onclick="removeBasketItem(${i})" style="font-size:0.65rem;letter-spacing:0.12em;text-transform:uppercase;color:var(--text-light);background:transparent;border:none;cursor:none;margin-left:0.5rem">Remove</button>
+        </div>
+      </div>
+      <p style="font-family:'Cormorant Garamond',serif;font-size:1.2rem;color:var(--brown)">£${item.price*item.qty}</p>
+    </div>
+  `).join('');
+
+  sumEl.innerHTML=`
+    <div style="max-width:380px;margin-left:auto;padding-top:1.5rem">
+      <div style="display:flex;justify-content:space-between;margin-bottom:0.7rem">
+        <span style="font-size:0.78rem;color:var(--text-mid)">Subtotal</span>
+        <span style="font-size:0.78rem;color:var(--brown)">£${total}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;margin-bottom:1rem">
+        <span style="font-size:0.78rem;color:var(--text-mid)">Shipping</span>
+        <span style="font-size:0.78rem;color:${shipping===0?'#7a9a8a':'var(--brown)'}">${shipping===0?'Free':'£'+shipping.toFixed(2)}</span>
+      </div>
+      <div style="display:flex;justify-content:space-between;padding:1rem 0;border-top:1px solid var(--cream-dark);border-bottom:1px solid var(--cream-dark);margin-bottom:1.5rem">
+        <span style="font-size:1rem;font-weight:600;color:var(--brown)">Total</span>
+        <span style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;color:var(--brown)">£${grandTotal.toFixed(2)}</span>
+      </div>
+      ${shipping>0?'<p style="font-size:0.72rem;color:var(--gold);margin-bottom:1rem;text-align:right">Add £'+(150-total).toFixed(2)+' more for free shipping</p>':''}
+      <button onclick="openCheckoutPage()" style="width:100%;padding:1.1rem;background:var(--brown);color:var(--cream);border:none;font-size:0.72rem;letter-spacing:0.18em;text-transform:uppercase;cursor:none">Proceed to Checkout →</button>
+    </div>
+  `;
+}
+function changeBasketQty(i,d){
+  cart[i].qty=Math.max(1,cart[i].qty+d);
+  renderCart();
+  renderBasketPage();
+}
+function removeBasketItem(i){
+  cart.splice(i,1);
+  renderCart();
+  renderBasketPage();
+}
+
+// ── CHECKOUT PAGE ──
+var stripe=Stripe('pk_test_51T4U6GHsCrEvPeVbOG9mVnPlFGb9b5JNciWPIikww2EDZb3hUqRAhiBPSsRiBVHcXCblyYqdIRIEl4y7mpcv7uy200Z7iWTI0q');
+var stripeElements=stripe.elements();
+var stripeCard=null;
+
+function openCheckoutPage(){
+  closeBasketPage();
+  renderCheckoutSummary();
+  document.getElementById('checkoutPage').style.display='block';
+  document.body.style.overflow='hidden';
+  // Mount Stripe card element
+  if(!stripeCard){
+    stripeCard=stripeElements.create('card',{
+      style:{
+        base:{fontFamily:"'Jost',sans-serif",fontSize:'14px',color:'#3e2b1e',iconColor:'#b8924a','::placeholder':{color:'#b8a898'}}
+      }
+    });
+    stripeCard.mount('#stripe-card-element');
+    stripeCard.on('change',function(e){
+      document.getElementById('stripe-errors').textContent=e.error?e.error.message:'';
+    });
+  }
+  selectPayMethod('card');
+}
+function closeCheckoutPage(){
+  document.getElementById('checkoutPage').style.display='none';
+  document.body.style.overflow='';
+  openBasketPage();
+}
+function renderCheckoutSummary(){
+  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const shipping=total>=150?0:8.50;
+  const grand=total+shipping;
+  document.getElementById('co-subtotal').textContent='£'+total;
+  document.getElementById('co-shipping').textContent=shipping===0?'Free':'£'+shipping.toFixed(2);
+  document.getElementById('co-total').textContent='£'+grand.toFixed(2);
+  document.getElementById('pay-total').textContent='£'+grand.toFixed(2);
+  document.getElementById('co-order-items').innerHTML=cart.map(i=>`
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:0.8rem">
+      <div style="display:flex;gap:0.8rem;align-items:center">
+        <div style="width:44px;height:44px;background:url('${i.bg}') center/cover;background-color:#e8e0d0;flex-shrink:0"></div>
+        <div>
+          <p style="font-size:0.78rem;color:var(--brown)">${i.title}</p>
+          <p style="font-size:0.65rem;color:var(--text-light)">${i.size} · Qty ${i.qty}</p>
+        </div>
+      </div>
+      <span style="font-size:0.78rem;color:var(--brown)">£${i.price*i.qty}</span>
+    </div>
+  `).join('');
+}
+function selectPayMethod(method){
+  ['card','apple','paypal','klarna'].forEach(m=>{
+    const btn=document.getElementById('pm-'+m);
+    const sec=document.getElementById('pay-'+m+'-section');
+    if(btn){btn.style.background=m===method?'var(--brown)':'transparent';btn.style.color=m===method?'var(--cream)':'var(--brown)';btn.style.borderColor=m===method?'var(--brown)':'var(--cream-dark)';}
+    if(sec)sec.style.display=m===method?'block':'none';
+  });
+  if(method==='apple'){
+    if(window.ApplePaySession&&ApplePaySession.canMakePayments()){
+      document.getElementById('apple-pay-button').style.display='block';
+      document.getElementById('apple-pay-unavailable').style.display='none';
+    }
+  }
+}
+async function submitStripePayment(){
+  const btn=document.getElementById('pay-btn');
+  const first=document.getElementById('co-first').value;
+  const last=document.getElementById('co-last').value;
+  const email=document.getElementById('co-email').value;
+  if(!first||!last||!email){
+    document.getElementById('stripe-errors').textContent='Please fill in your name and email before paying.';
+    return;
+  }
+  btn.textContent='Processing…';
+  btn.style.opacity='0.7';
+  // In test mode — simulate success
+  const {paymentMethod,error}=await stripe.createPaymentMethod({
+    type:'card',
+    card:stripeCard,
+    billing_details:{name:first+' '+last,email:email}
+  });
+  if(error){
+    document.getElementById('stripe-errors').textContent=error.message;
+    btn.textContent='Place Order — '+document.getElementById('pay-total').textContent;
+    btn.style.opacity='1';
+    return;
+  }
+  // Payment method created successfully — show confirmation
+  showConfirmation();
+}
+function submitKlarna(){
+  showConfirmation();
+}
+function showConfirmation(){
+  const total=cart.reduce((s,i)=>s+i.price*i.qty,0);
+  const shipping=total>=150?0:8.50;
+  document.getElementById('conf-order-summary').innerHTML=`
+    <p style="font-size:0.65rem;letter-spacing:0.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem">Order Details</p>
+    ${cart.map(i=>`<div style="display:flex;justify-content:space-between;margin-bottom:0.5rem"><span style="font-size:0.78rem;color:var(--brown)">${i.title} (${i.size}) ×${i.qty}</span><span style="font-size:0.78rem;color:var(--brown)">£${i.price*i.qty}</span></div>`).join('')}
+    <div style="border-top:1px solid var(--cream-dark);margin-top:0.8rem;padding-top:0.8rem;display:flex;justify-content:space-between">
+      <span style="font-size:0.85rem;font-weight:600;color:var(--brown)">Total paid</span>
+      <span style="font-size:0.85rem;font-weight:600;color:var(--brown)">£${(total+shipping).toFixed(2)}</span>
+    </div>
+  `;
+  document.getElementById('checkoutPage').style.display='none';
+  const conf=document.getElementById('confirmationPage');
+  conf.style.display='block';
+  cart=[];
+  renderCart();
+}
+function closeConfirmationPage(){
+  document.getElementById('confirmationPage').style.display='none';
+  document.body.style.overflow='';
+}
+
+// ── CONTACT FORM ──
+function submitForm(e){
+  e.preventDefault();
+  const btn=e.target.querySelector('.btn-primary');
+  btn.textContent='Sending…';
+  btn.style.opacity='0.7';
+  setTimeout(()=>{
+    btn.textContent='Message Sent ✓';
+    btn.style.ba
