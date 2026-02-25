@@ -1258,7 +1258,8 @@ footer{background:var(--brown);color:var(--cream);padding:5rem 5rem 2rem}
   </div>
 </footer>
 
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+<script>
+document.addEventListener("DOMContentLoaded", function(){
 // ── CUSTOM CURSOR ──
 (function(){
   var dot = document.getElementById('cursor');
@@ -2024,4 +2025,12 @@ function submitForm(e){
   btn.style.opacity='0.7';
   setTimeout(()=>{
     btn.textContent='Message Sent ✓';
-    btn.style.ba
+    btn.style.background='var(--brown)';
+    btn.style.opacity='1';
+    e.target.reset();
+  },1800);
+}
+}); // end DOMContentLoaded
+</script>
+</body>
+</html>
